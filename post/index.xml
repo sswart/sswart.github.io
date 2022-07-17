@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on Jesse Swart Coding Blog</title>
+    <link>https://sswart.github.io/post/</link>
+    <description>Recent content in Posts on Jesse Swart Coding Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 17 Jul 2022 15:50:15 +0200</lastBuildDate><atom:link href="https://sswart.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Five easy steps to get started with secure DevOps</title>
+      <link>https://sswart.github.io/post/five-easy-devsecops-steps/</link>
+      <pubDate>Sun, 17 Jul 2022 15:50:15 +0200</pubDate>
+      
+      <guid>https://sswart.github.io/post/five-easy-devsecops-steps/</guid>
+      <description>The DevOps movement has claimed it&amp;rsquo;s rightful place in our hearts. If it hasn&amp;rsquo;t, go read up on it. Working in a proper DevOps environment is amazing, and I cannot recommend enough for any organization to try it.
+But, let&amp;rsquo;s be real. DevOps has been around for a while. It is not the shiny new thing it used to be anymore.
+We need something new.
+Maybe something security related, security is always an important aspect of creating software.</description>
+    </item>
+    
+  </channel>
+</rss>
