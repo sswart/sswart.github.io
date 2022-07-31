@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>dotnet MAUI public key pinning | Jesse Swart Coding Blog</title>
+<meta name="keywords" content="" />
+<meta name="description" content="dotnet MAUI public key pinning When it comes to client-side security, mobile apps can be a double-edged sword. On the one hand, the software is on a user-controlled device, so security is out of your hands. On the other hand, that device will probably connect to any old public wifi that it can get its hands on. Man-in-the-middle attacks are a definite risk.
+Luckily, we can improve protection against these by using certificate pinning, or public key pinning.">
+<meta name="author" content="">
+<link rel="canonical" href="https://sswart.github.io/post/maui-key-pinning/" />
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://sswart.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://sswart.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://sswart.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://sswart.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://sswart.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.90.1" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="dotnet MAUI public key pinning" />
+<meta property="og:description" content="dotnet MAUI public key pinning When it comes to client-side security, mobile apps can be a double-edged sword. On the one hand, the software is on a user-controlled device, so security is out of your hands. On the other hand, that device will probably connect to any old public wifi that it can get its hands on. Man-in-the-middle attacks are a definite risk.
+Luckily, we can improve protection against these by using certificate pinning, or public key pinning." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sswart.github.io/post/maui-key-pinning/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-07-31T14:03:34&#43;02:00" />
+<meta property="article:modified_time" content="2022-07-31T14:03:34&#43;02:00" /><meta property="og:site_name" content="Software Engineering" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="dotnet MAUI public key pinning"/>
+<meta name="twitter:description" content="dotnet MAUI public key pinning When it comes to client-side security, mobile apps can be a double-edged sword. On the one hand, the software is on a user-controlled device, so security is out of your hands. On the other hand, that device will probably connect to any old public wifi that it can get its hands on. Man-in-the-middle attacks are a definite risk.
+Luckily, we can improve protection against these by using certificate pinning, or public key pinning."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://sswart.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "dotnet MAUI public key pinning",
+      "item": "https://sswart.github.io/post/maui-key-pinning/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "dotnet MAUI public key pinning",
+  "name": "dotnet MAUI public key pinning",
+  "description": "dotnet MAUI public key pinning When it comes to client-side security, mobile apps can be a double-edged sword. On the one hand, the software is on a user-controlled device, so security is out of your hands. On the other hand, that device will probably connect to any old public wifi that it can get its hands on. Man-in-the-middle attacks are a definite risk.\nLuckily, we can improve protection against these by using certificate pinning, or public key pinning.",
+  "keywords": [
+    
+  ],
+  "articleBody": "dotnet MAUI public key pinning When it comes to client-side security, mobile apps can be a double-edged sword. On the one hand, the software is on a user-controlled device, so security is out of your hands. On the other hand, that device will probably connect to any old public wifi that it can get its hands on. Man-in-the-middle attacks are a definite risk.\nLuckily, we can improve protection against these by using certificate pinning, or public key pinning. Instead of saying that a certificate that matches a domain suffices, we want to make sure that it is in fact the right back-end that we are talking to. By pinning the public key of our back-end api certificate, essentially having a local copy of sorts, and comparing that with the actual public key for each request that we make, we can be more sure that it is in fact our back-end, and not some spoofed version of it.\n Caution: this requires proper maintenance. If you ever change your certificate on the back-end side and you forget to update your client app, it will no longer be able to communicate with your back-end.\n Here’s how to do it in your dotnet MAUI application for Android and iOS. First off, we need the public key of our certificate. Preferably hashed with SHA256. This can be easily achieved using openssl. The following command will give us the hashed public key: openssl s_client -connect www.yourdomain.com:443 | openssl x509 -pubkey -noout | openssl rsa -pubin -outform der | openssl dgst -sha256 -binary | openssl enc -base64.\nNow we will take this hash and configure both of our platforms to verify the keys. There is multiple ways to achieve this. You can implement your own custom implementations of the native NSURlSessionHandler (iOS) and AndroidMessageHandler classes, and provide them using an implementation of IHttpsClientHandlerService. But there is an easier way.\nBoth the Android and iOS platforms offer a built-in way to add certificate pinning. These work just fine with MAUI. Why write your own code when it’s already available and built-in. For Android add a file called network_security_config.xml in a folder xml in your Android resources folder. Which can be found under Platform/Android/Resources. If the xml folder does not exist yet, create it.\nAdd the following to the file:\n    includeSubdomains=\"true\"example.com  expiration=\"2022-12-31\"  digest=\"SHA-256\"7HIpactkIAq2Y49orFOOQKurWxmmSFZhBCoQYcRhJ3Y=    Replace example.com with your domain, and replace the pin with the public key hash that you just made. The pin-set element is a collection, when you plan on updating your certificate, add the updated public key to this set and roll it out to your users before updating it server-side. This way, your users won’t experience any downtime.\nFind the official docs on certificate pinning for Android here.\nFor iOS, we add the following to the Info.plist file, which can be found under Platforms/iOS/Info.plist.\nNSAppTransportSecurity  NSPinnedDomains  example.org  NSIncludesSubdomains  NSPinnedCAIdentities   SPKI-SHA256-BASE64 7HIpactkIAq2Y49orFOOQKurWxmmSFZhBCoQYcRhJ3Y=      Again NSPinnedDomains is a collection to which you can add multiple items. To support a future/backup key, simply add an additional example.org with the other hash. You can find more about this in the official iOS documentation here.\nOnce you have these changes in place, you are all set. You can simulate an invalid public key by changing a letter in your hash, and attempting to connect to your back-end. Both Android and iOS should throw a native exception telling you the pinned key does not match. You have now made it harder for a man-in-the-middle to spoof your back-end to get valuable data from your app!\n",
+  "wordCount" : "604",
+  "inLanguage": "en",
+  "datePublished": "2022-07-31T14:03:34+02:00",
+  "dateModified": "2022-07-31T14:03:34+02:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://sswart.github.io/post/maui-key-pinning/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Jesse Swart Coding Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sswart.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://sswart.github.io/" accesskey="h" title="Jesse Swart Coding Blog (Alt + H)">Jesse Swart Coding Blog</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      dotnet MAUI public key pinning
+    </h1>
+    <div class="post-meta"><span title='2022-07-31 14:03:34 +0200 CEST'>July 31, 2022</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="dotnet-maui-public-key-pinning">dotnet MAUI public key pinning<a hidden class="anchor" aria-hidden="true" href="#dotnet-maui-public-key-pinning">#</a></h1>
+<p>When it comes to client-side security, mobile apps can be a double-edged sword. On the one hand, the software is on a user-controlled device, so security is out of your hands. On the other hand, that device will probably connect to any old public wifi that it can get its hands on. Man-in-the-middle attacks are a definite risk.</p>
+<p>Luckily, we can improve protection against these by using certificate pinning, or public key pinning. Instead of saying that a certificate that matches a domain suffices, we want to make sure that it is in fact the right back-end that we are talking to. By pinning the public key of our back-end api certificate, essentially having a local copy of sorts, and comparing that with the actual public key for each request that we make, we can be more sure that it is in fact our back-end, and not some spoofed version of it.</p>
+<blockquote>
+<p>Caution: this requires proper maintenance. If you ever change your certificate on the back-end side and you forget to update your client app, it will no longer be able to communicate with your back-end.</p>
+</blockquote>
+<p>Here&rsquo;s how to do it in your dotnet MAUI application for Android and iOS. First off, we need the public key of our certificate. Preferably hashed with SHA256. This can be easily achieved using <code>openssl</code>. The following command will give us the hashed public key: <code>openssl s_client -connect www.yourdomain.com:443 | openssl x509 -pubkey -noout | openssl rsa -pubin -outform der | openssl dgst -sha256 -binary | openssl enc -base64</code>.</p>
+<p>Now we will take this hash and configure both of our platforms to verify the keys. There is multiple ways to achieve this. You can implement your own custom implementations of the native <code>NSURlSessionHandler</code> (iOS) and <code>AndroidMessageHandler</code> classes, and provide them using an implementation of <code>IHttpsClientHandlerService</code>. But there is an easier way.</p>
+<p>Both the Android and iOS platforms offer a built-in way to add certificate pinning. These work just fine with MAUI. Why write your own code when it&rsquo;s already available and built-in. For Android add a file called <code>network_security_config.xml</code> in a folder <code>xml</code> in your Android resources folder. Which can be found under <code>Platform/Android/Resources</code>. If the <code>xml</code> folder does not exist yet, create it.</p>
+<p><img loading="lazy" src="images/maui-android-network-security-config.png" alt="network-security-config-location"  />
+</p>
+<p>Add the following to the file:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;network-security-config&gt;</span>
+    <span style="color:#f92672">&lt;domain-config&gt;</span>
+        <span style="color:#f92672">&lt;domain</span> <span style="color:#a6e22e">includeSubdomains=</span><span style="color:#e6db74">&#34;true&#34;</span><span style="color:#f92672">&gt;</span>example.com<span style="color:#f92672">&lt;/domain&gt;</span>
+        <span style="color:#f92672">&lt;pin-set</span> <span style="color:#a6e22e">expiration=</span><span style="color:#e6db74">&#34;2022-12-31&#34;</span><span style="color:#f92672">&gt;</span>
+            <span style="color:#f92672">&lt;pin</span> <span style="color:#a6e22e">digest=</span><span style="color:#e6db74">&#34;SHA-256&#34;</span><span style="color:#f92672">&gt;</span>7HIpactkIAq2Y49orFOOQKurWxmmSFZhBCoQYcRhJ3Y=<span style="color:#f92672">&lt;/pin&gt;</span>
+        <span style="color:#f92672">&lt;/pin-set&gt;</span>
+    <span style="color:#f92672">&lt;/domain-config&gt;</span>
+<span style="color:#f92672">&lt;/network-security-config&gt;</span>
+</code></pre></div><p>Replace <code>example.com</code> with your domain, and replace the pin with the public key hash that you just made. The <code>pin-set</code> element is a collection, when you plan on updating your certificate, add the updated public key to this set and roll it out to your users before updating it server-side. This way, your users won&rsquo;t experience any downtime.</p>
+<p>Find the official docs on certificate pinning for Android <a href="https://developer.android.com/training/articles/security-config#CertificatePinning">here</a>.</p>
+<p>For iOS, we add the following to the <code>Info.plist</code> file, which can be found under <code>Platforms/iOS/Info.plist</code>.</p>
+<p><img loading="lazy" src="images/maui-ios-info-plist.png" alt="network-security-config-location"  />
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;key&gt;</span>NSAppTransportSecurity<span style="color:#f92672">&lt;/key&gt;</span>
+<span style="color:#f92672">&lt;dict&gt;</span>
+    <span style="color:#f92672">&lt;key&gt;</span>NSPinnedDomains<span style="color:#f92672">&lt;/key&gt;</span>
+    <span style="color:#f92672">&lt;dict&gt;</span>
+        <span style="color:#f92672">&lt;key&gt;</span>example.org<span style="color:#f92672">&lt;/key&gt;</span>
+        <span style="color:#f92672">&lt;dict&gt;</span>
+            <span style="color:#f92672">&lt;key&gt;</span>NSIncludesSubdomains<span style="color:#f92672">&lt;/key&gt;</span>
+            <span style="color:#f92672">&lt;true/&gt;</span>
+            <span style="color:#f92672">&lt;key&gt;</span>NSPinnedCAIdentities<span style="color:#f92672">&lt;/key&gt;</span>
+            <span style="color:#f92672">&lt;array&gt;</span>
+                <span style="color:#f92672">&lt;dict&gt;</span>
+                    <span style="color:#f92672">&lt;key&gt;</span>SPKI-SHA256-BASE64<span style="color:#f92672">&lt;/key&gt;</span>
+                    <span style="color:#f92672">&lt;string&gt;</span>7HIpactkIAq2Y49orFOOQKurWxmmSFZhBCoQYcRhJ3Y=<span style="color:#f92672">&lt;/string&gt;</span>
+                <span style="color:#f92672">&lt;/dict&gt;</span>
+            <span style="color:#f92672">&lt;/array&gt;</span>
+        <span style="color:#f92672">&lt;/dict&gt;</span>
+    <span style="color:#f92672">&lt;/dict&gt;</span>
+<span style="color:#f92672">&lt;/dict&gt;</span>
+</code></pre></div><p>Again <code>NSPinnedDomains</code> is a collection to which you can add multiple items. To support a future/backup key, simply add an additional <code>&lt;key&gt;example.org&lt;/key&gt;</code> with the other hash. You can find more about this in the official iOS documentation <a href="https://developer.apple.com/news/?id=g9ejcf8y">here</a>.</p>
+<p>Once you have these changes in place, you are all set. You can simulate an invalid public key by changing a letter in your hash, and attempting to connect to your back-end. Both Android and iOS should throw a native exception telling you the pinned key does not match. You have now made it harder for a man-in-the-middle to spoof your back-end to get valuable data from your app!</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://sswart.github.io/">Jesse Swart Coding Blog</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
