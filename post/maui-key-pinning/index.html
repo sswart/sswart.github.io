@@ -187,7 +187,7 @@ Luckily, we can improve protection against these by using certificate pinning, o
 <p>Here&rsquo;s how to do it in your dotnet MAUI application for Android and iOS. First off, we need the public key of our certificate. Preferably hashed with SHA256. This can be easily achieved using <code>openssl</code>. The following command will give us the hashed public key: <code>openssl s_client -connect www.yourdomain.com:443 | openssl x509 -pubkey -noout | openssl rsa -pubin -outform der | openssl dgst -sha256 -binary | openssl enc -base64</code>.</p>
 <p>Now we will take this hash and configure both of our platforms to verify the keys. There is multiple ways to achieve this. You can implement your own custom implementations of the native <code>NSURlSessionHandler</code> (iOS) and <code>AndroidMessageHandler</code> classes, and provide them using an implementation of <code>IHttpsClientHandlerService</code>. But there is an easier way.</p>
 <p>Both the Android and iOS platforms offer a built-in way to add certificate pinning. These work just fine with MAUI. Why write your own code when it&rsquo;s already available and built-in. For Android add a file called <code>network_security_config.xml</code> in a folder <code>xml</code> in your Android resources folder. Which can be found under <code>Platform/Android/Resources</code>. If the <code>xml</code> folder does not exist yet, create it.</p>
-<p><img loading="lazy" src="images/maui-android-network-security-config.png" alt="network-security-config-location"  />
+<p><img loading="lazy" src="/images/maui-android-network-security-config.png" alt="network-security-config-location"  />
 </p>
 <p>Add the following to the file:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
@@ -202,7 +202,7 @@ Luckily, we can improve protection against these by using certificate pinning, o
 </code></pre></div><p>Replace <code>example.com</code> with your domain, and replace the pin with the public key hash that you just made. The <code>pin-set</code> element is a collection, when you plan on updating your certificate, add the updated public key to this set and roll it out to your users before updating it server-side. This way, your users won&rsquo;t experience any downtime.</p>
 <p>Find the official docs on certificate pinning for Android <a href="https://developer.android.com/training/articles/security-config#CertificatePinning">here</a>.</p>
 <p>For iOS, we add the following to the <code>Info.plist</code> file, which can be found under <code>Platforms/iOS/Info.plist</code>.</p>
-<p><img loading="lazy" src="images/maui-ios-info-plist.png" alt="network-security-config-location"  />
+<p><img loading="lazy" src="/images/maui-ios-info-plist.png" alt="network-security-config-location"  />
 </p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;key&gt;</span>NSAppTransportSecurity<span style="color:#f92672">&lt;/key&gt;</span>
 <span style="color:#f92672">&lt;dict&gt;</span>
