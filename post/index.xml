@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Jesse Swart Coding Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 31 Jul 2022 14:03:34 +0200</lastBuildDate><atom:link href="https://sswart.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Aug 2022 13:53:42 +0200</lastBuildDate><atom:link href="https://sswart.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Secret Scanning in Azure DevOps</title>
+      <link>https://sswart.github.io/post/secret-scanning-azdo/</link>
+      <pubDate>Tue, 23 Aug 2022 13:53:42 +0200</pubDate>
+      
+      <guid>https://sswart.github.io/post/secret-scanning-azdo/</guid>
+      <description>Scan your pull requests for secrets with the free gitleaks tool</description>
+    </item>
+    
     <item>
       <title>dotnet MAUI public key pinning</title>
       <link>https://sswart.github.io/post/maui-key-pinning/</link>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Azure DevOps on Jesse Swart Coding Blog</title>
+    <link>https://sswart.github.io/tags/azure-devops/</link>
+    <description>Recent content in Azure DevOps on Jesse Swart Coding Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 23 Aug 2022 13:53:42 +0200</lastBuildDate><atom:link href="https://sswart.github.io/tags/azure-devops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Secret Scanning in Azure DevOps</title>
+      <link>https://sswart.github.io/post/secret-scanning-azdo/</link>
+      <pubDate>Tue, 23 Aug 2022 13:53:42 +0200</pubDate>
+      
+      <guid>https://sswart.github.io/post/secret-scanning-azdo/</guid>
+      <description>Scan your pull requests for secrets with the free gitleaks tool</description>
+    </item>
+    
+  </channel>
+</rss>
