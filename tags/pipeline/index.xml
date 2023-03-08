@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>azure devops on Jesse Swart Coding Blog</title>
-    <link>https://sswart.github.io/tags/azure-devops/</link>
-    <description>Recent content in azure devops on Jesse Swart Coding Blog</description>
+    <title>pipeline on Jesse Swart Coding Blog</title>
+    <link>https://sswart.github.io/tags/pipeline/</link>
+    <description>Recent content in pipeline on Jesse Swart Coding Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Mar 2023 15:13:24 +0100</lastBuildDate><atom:link href="https://sswart.github.io/tags/azure-devops/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Mar 2023 15:13:24 +0100</lastBuildDate><atom:link href="https://sswart.github.io/tags/pipeline/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Azure DevOps Path Variable Pitfall</title>
       <link>https://sswart.github.io/post/azdo-variable-pitfall/</link>
@@ -16,15 +16,6 @@
       <description>Ever spent too much time debugging an issue that seemed impossible at first, but then turned out to be stupid? I have.
 Pipeline I was working on a pipeline. Just your run of the mill deployment pipeline really. I was trying to deploy some resources from a bicep template. It looked something like the following:
 variables: path: $(Build.SourcesDirectory)/agw-bicep agwName: &amp;#39;my-agw&amp;#39; agwRg: &amp;#39;my-agw-rg&amp;#39; kvName: &amp;#39;my-agw-kv&amp;#39; trigger: none pool: vmImage: ubuntu-latest jobs: - job: deploy pool: vmImage: ubuntu-latest timeoutInMinutes: 15 steps: - task: AzureCLI@2 displayName: &amp;#39;Call Azure Cli&amp;#39; inputs: azureSubscription: &amp;#39;&amp;lt;sub&amp;gt;&amp;#39; scriptType: &amp;#39;pscore&amp;#39; scriptLocation: &amp;#39;inlineScript&amp;#39; workingDirectory: $(oath) inlineScript: | (.</description>
-    </item>
-    
-    <item>
-      <title>Secret Scanning in Azure DevOps</title>
-      <link>https://sswart.github.io/post/secret-scanning-azdo/</link>
-      <pubDate>Tue, 23 Aug 2022 13:53:42 +0200</pubDate>
-      
-      <guid>https://sswart.github.io/post/secret-scanning-azdo/</guid>
-      <description>Scan your pull requests for secrets with the free gitleaks tool</description>
     </item>
     
   </channel>
