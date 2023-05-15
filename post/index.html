@@ -132,6 +132,20 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Authenticate Renovate with Service Principal in Azure DevOps
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>If you are using Renovate or a similar tool to manage some aspects of your Azure DevOps repositories, you might have come accross a security issue. Renovate wants to to use a PAT that you created, or the $(System.AccessToken) variable.
+You probably want to stay away from creating a PAT yourself for the following reasons:
+  User Dependency: PATs are tied to the user account that creates them. If that user leaves the organization or if their permissions change, the PAT and any processes using it will be affected....</p>
+  </section>
+  <footer class="entry-footer"><span title='2023-05-15 11:28:51 +0200 CEST'>May 15, 2023</span></footer>
+  <a class="entry-link" aria-label="post link to Authenticate Renovate with Service Principal in Azure DevOps" href="https://sswart.github.io/post/azdo-renovate-spn-authentication/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Azure DevOps Path Variable Pitfall
     </h2>
   </header>
