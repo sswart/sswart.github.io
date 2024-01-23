@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>monitor on Jesse Swart Coding Blog</title>
+    <link>https://sswart.github.io/tags/monitor/</link>
+    <description>Recent content in monitor on Jesse Swart Coding Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 23 Jan 2024 18:37:02 +0100</lastBuildDate><atom:link href="https://sswart.github.io/tags/monitor/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Access the Log Analytics API with Managed Identity</title>
+      <link>https://sswart.github.io/post/mi-loganalyticsapi/</link>
+      <pubDate>Tue, 23 Jan 2024 18:37:02 +0100</pubDate>
+      
+      <guid>https://sswart.github.io/post/mi-loganalyticsapi/</guid>
+      <description>Extending your alerts with additional data from the Log Analytics API I recently came accross a scenario where I needed to extend the data that was available in an alert. The alert data that was sent in the actiongroup only contained an EventId field. I was not at liberty to modify the alert, but I did notice an interesting extra property in the payload. The payload looked something like this:</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -6,7 +6,16 @@
     <description>Recent content on Jesse Swart Coding Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 15 May 2023 11:28:51 +0200</lastBuildDate><atom:link href="https://sswart.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Jan 2024 18:37:02 +0100</lastBuildDate><atom:link href="https://sswart.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Access the Log Analytics API with Managed Identity</title>
+      <link>https://sswart.github.io/post/mi-loganalyticsapi/</link>
+      <pubDate>Tue, 23 Jan 2024 18:37:02 +0100</pubDate>
+      
+      <guid>https://sswart.github.io/post/mi-loganalyticsapi/</guid>
+      <description>Extending your alerts with additional data from the Log Analytics API I recently came accross a scenario where I needed to extend the data that was available in an alert. The alert data that was sent in the actiongroup only contained an EventId field. I was not at liberty to modify the alert, but I did notice an interesting extra property in the payload. The payload looked something like this:</description>
+    </item>
+    
     <item>
       <title>Authenticate Renovate with Service Principal in Azure DevOps</title>
       <link>https://sswart.github.io/post/azdo-renovate-spn-authentication/</link>
@@ -15,7 +24,7 @@
       <guid>https://sswart.github.io/post/azdo-renovate-spn-authentication/</guid>
       <description>If you are using Renovate or a similar tool to manage some aspects of your Azure DevOps repositories, you might have come accross a security issue. Renovate wants to to use a PAT that you created, or the $(System.AccessToken) variable.
 You probably want to stay away from creating a PAT yourself for the following reasons:
-  User Dependency: PATs are tied to the user account that creates them. If that user leaves the organization or if their permissions change, the PAT and any processes using it will be affected.</description>
+User Dependency: PATs are tied to the user account that creates them. If that user leaves the organization or if their permissions change, the PAT and any processes using it will be affected.</description>
     </item>
     
     <item>

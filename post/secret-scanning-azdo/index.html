@@ -11,7 +11,7 @@
 <meta name="author" content="">
 <link rel="canonical" href="https://sswart.github.io/post/secret-scanning-azdo/" />
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.5b9ae0304f93db6cc493f51846f012428af399c614b4f2fbdb7fa59dd4d5ef5b.js" integrity="sha256-W5rgME&#43;T22zEk/UYRvASQorzmcYUtPL723&#43;lndTV71s="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://sswart.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://sswart.github.io/favicon-16x16.png">
@@ -20,7 +20,7 @@
 <link rel="mask-icon" href="https://sswart.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.90.1" />
+<meta name="generator" content="Hugo 0.121.2">
 <noscript>
     <style>
         #theme-toggle,
@@ -174,7 +174,7 @@
     <div class="post-description">
       Scan your pull requests for secrets with the free gitleaks tool
     </div>
-    <div class="post-meta"><span title='2022-08-23 13:53:42 +0200 CEST'>August 23, 2022</span>
+    <div class="post-meta">&lt;span title=&#39;2022-08-23 13:53:42 &#43;0200 CEST&#39;&gt;August 23, 2022&lt;/span&gt;
 
 </div>
   </header> 
@@ -186,21 +186,21 @@
 <p>Any secrets will be shown in the console output. Use this output to add any false positives to your <code>allowlist</code> in the <code>.gitleaks.toml</code> file.</p>
 <p>The next step is to add it to a pipeline. The docker command to use will be very similar, only this time you only want to scan the commits of a pull request (before it is merged to main). To do this, you can add an argument <code>--log-opts</code> to the <code>docker run</code> command. <code>--log-opts</code> is the argument that GitLeaks will pas to a <code>git log</code> command, so the code to check is very configurable. In our case, we will do every commit on the current branch that is not on main by passing <code>origin/main..HEAD</code>.</p>
 <p>In a pipeline, you would get the following yaml:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">jobs</span>:
-- <span style="color:#f92672">job</span>: <span style="color:#ae81ff">secrets</span>
-  <span style="color:#f92672">displayName</span>: <span style="color:#ae81ff">scan for secrets</span>
-  <span style="color:#f92672">pool</span>:
-    <span style="color:#f92672">vmImage</span>: <span style="color:#ae81ff">ubuntu-22.04</span>
-  
-  <span style="color:#f92672">steps</span>:
-  - <span style="color:#f92672">checkout</span>: <span style="color:#ae81ff">self</span>
-
-  - <span style="color:#f92672">task</span>: <span style="color:#ae81ff">DockerInstaller@0</span>
-    <span style="color:#f92672">inputs</span>:
-      <span style="color:#f92672">dockerVersion</span>: <span style="color:#e6db74">&#39;17.09.0-ce&#39;</span>
-
-  - <span style="color:#f92672">script</span>: <span style="color:#ae81ff">docker run -v $(Build.SourcesDirectory):/path zricethezav/gitleaks:latest detect --source=&#34;/path&#34; --log-opts=&#34;origin/main..HEAD&#34; --verbose --redact -f &#34;json&#34;</span>
-</code></pre></div><p>If any secrets are found, it will automatically fail your pipeline. If your branch policies are setup correctly, you have now made it significantly harder to accidentally put any secrets into the repository.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">jobs</span>:
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">job</span>: <span style="color:#ae81ff">secrets</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">displayName</span>: <span style="color:#ae81ff">scan for secrets</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">pool</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">vmImage</span>: <span style="color:#ae81ff">ubuntu-22.04</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">steps</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">checkout</span>: <span style="color:#ae81ff">self</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">task</span>: <span style="color:#ae81ff">DockerInstaller@0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">inputs</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">dockerVersion</span>: <span style="color:#e6db74">&#39;17.09.0-ce&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">script</span>: <span style="color:#ae81ff">docker run -v $(Build.SourcesDirectory):/path zricethezav/gitleaks:latest detect --source=&#34;/path&#34; --log-opts=&#34;origin/main..HEAD&#34; --verbose --redact -f &#34;json&#34;</span>
+</span></span></code></pre></div><p>If any secrets are found, it will automatically fail your pipeline. If your branch policies are setup correctly, you have now made it significantly harder to accidentally put any secrets into the repository.</p>
 
 
   </div>
@@ -217,7 +217,7 @@
     </main>
     
 <footer class="footer">
-    <span>&copy; 2023 <a href="https://sswart.github.io/">Jesse Swart Coding Blog</a></span>
+    <span>&copy; 2024 <a href="https://sswart.github.io/">Jesse Swart Coding Blog</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

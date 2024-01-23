@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Access the Log Analytics API with Managed Identity | Jesse Swart Coding Blog</title>
+<meta name="keywords" content="azure, alert, log analytics, monitor" />
+<meta name="description" content="Extending your alerts with additional data from the Log Analytics API I recently came accross a scenario where I needed to extend the data that was available in an alert. The alert data that was sent in the actiongroup only contained an EventId field. I was not at liberty to modify the alert, but I did notice an interesting extra property in the payload. The payload looked something like this:">
+<meta name="author" content="">
+<link rel="canonical" href="https://sswart.github.io/post/mi-loganalyticsapi/" />
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.5b9ae0304f93db6cc493f51846f012428af399c614b4f2fbdb7fa59dd4d5ef5b.js" integrity="sha256-W5rgME&#43;T22zEk/UYRvASQorzmcYUtPL723&#43;lndTV71s="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://sswart.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://sswart.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://sswart.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://sswart.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://sswart.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.121.2">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Access the Log Analytics API with Managed Identity" />
+<meta property="og:description" content="Extending your alerts with additional data from the Log Analytics API I recently came accross a scenario where I needed to extend the data that was available in an alert. The alert data that was sent in the actiongroup only contained an EventId field. I was not at liberty to modify the alert, but I did notice an interesting extra property in the payload. The payload looked something like this:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sswart.github.io/post/mi-loganalyticsapi/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-01-23T18:37:02&#43;01:00" />
+<meta property="article:modified_time" content="2024-01-23T18:37:02&#43;01:00" /><meta property="og:site_name" content="Software Engineering" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Access the Log Analytics API with Managed Identity"/>
+<meta name="twitter:description" content="Extending your alerts with additional data from the Log Analytics API I recently came accross a scenario where I needed to extend the data that was available in an alert. The alert data that was sent in the actiongroup only contained an EventId field. I was not at liberty to modify the alert, but I did notice an interesting extra property in the payload. The payload looked something like this:"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://sswart.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Access the Log Analytics API with Managed Identity",
+      "item": "https://sswart.github.io/post/mi-loganalyticsapi/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Access the Log Analytics API with Managed Identity",
+  "name": "Access the Log Analytics API with Managed Identity",
+  "description": "Extending your alerts with additional data from the Log Analytics API I recently came accross a scenario where I needed to extend the data that was available in an alert. The alert data that was sent in the actiongroup only contained an EventId field. I was not at liberty to modify the alert, but I did notice an interesting extra property in the payload. The payload looked something like this:",
+  "keywords": [
+    "azure", "alert", "log analytics", "monitor"
+  ],
+  "articleBody": "Extending your alerts with additional data from the Log Analytics API I recently came accross a scenario where I needed to extend the data that was available in an alert. The alert data that was sent in the actiongroup only contained an EventId field. I was not at liberty to modify the alert, but I did notice an interesting extra property in the payload. The payload looked something like this:\n{\r\"schemaId\": \"azureMonitorCommonAlertSchema\",\r\"data\": {\r\"essentials\": {\r\"alertId\": \"/subscriptions//providers/Microsoft.AlertsManagement/alerts/\",\r\"alertRule\": \"\",\r(...)\r},\r\"alertContext\": {\r\"properties\": null,\r\"conditionType\": \"LogQueryCriteria\",\r\"condition\": {\r\"windowSize\": \"PT5M\",\r\"allOf\": [\r{\r\"searchQuery\": \"AzureActivity | where OperationNameValue startswith \\\"MICROSOFT AUTHORIZATION/ROLEASSIGNMENTSCHEDULEREQUESTS\\\" | where ActivityStatusValue has \\\"Start\\\" | where Properties has \\\"requestBody\\\"\",\r\"metricMeasureColumn\": null,\r\"targetResourceTypes\": null,\r\"operator\": \"GreaterThan\",\r\"threshold\": \"0\",\r\"timeAggregation\": \"Count\",\r\"dimensions\": [\r{\r\"name\": \"EventDataId\",\r\"value\": \"\"\r}\r],\r\"metricValue\": 1,\r\"failingPeriods\": {\r\"numberOfEvaluationPeriods\": 1,\r\"minFailingPeriodsToAlert\": 1\r},\r\"linkToSearchResultsUI\": \"\",\r\"linkToFilteredSearchResultsUI\": \"\",\r\"linkToSearchResultsAPI\": \"\",\r\"linkToFilteredSearchResultsAPI\": \"https://api.loganalytics.io/v1/workspaces/(...)\"\r}\r],\r(...)\r}\r},\r\"customProperties\": null\r}\r} If I want to handle this alert, all I really get is an EventDataId. Sure, I can add some context based on the name of the alert, or the query, but what I would really like is to provide some relevant info from the logs that triggered this alert. Luckily, the payload already points me in the right direction. The linkToFilteredSearchResultsAPI property contains a link to the exact logs that triggered this alert. All I need to do is to call this API and I can get the data I need.\nThe challenge The challenge is calling this API, which requires an authenticated principal. In my case, I was running in an Azure Function, and I wanted to use a Managed Identity to authenticate against the API. A similar case would be handling alerts in a logic app.\nIn both cases, I want the identity of the function or logic app to be used to authenticate against the API. Instead of using a service principal with a client secret, I just want to use the Managed Identity that is easily created out of the box. This is a bit more challenging than it sounds.\nThe solution The link I got in the payload is pointing to https://api.loganalytics.io, which the is Azure Log Analytics API. To access this, my Managed Identity needs to be granted access to the API through Microsoft Entra ID. Besides that, my Managed Identity needs to be granted access to the Log Analytics workspace. This is done through the Azure RBAC system, using the ‘Log Analytics Reader’ role.\nThe latter part is relatively simple, and can be done through any conventional means, like bicep or the Azure Portal. The first part is a bit more challenging. When I looked at the Enterprise App in Entra ID, I noticed that it is not actually possible to grant access through the portal. Instead, I had to resort to PowerShell, using the Microsoft Graph module.\nThe Microsoft Graph module is a bit of a pain to work with, since the documentation is fairly limited. I often find pieces of information on the old Azure AD PowerShell module, which usually translate decently well to the Microsoft Graph module. After consulting the documentation to get the right signatures, and some trial and error, I managed to get the right PowerShell script to grant access to the Log Analytics API for my Managed Identity.\nFirst, I needed to get the ID of the Log Analytics API resource in Entra ID. This is a static id, and can be retrieved through the portal. It is ca7f3f0b-7d91-482c-8e09-c5d840d0eac5. Next, I needed to get the ID of the AppRole that allows another app to access the Log Analytics API. This is a bit more challenging, but can be done through the following PowerShell command:\n$logAppId = \"ca7f3f0b-7d91-482c-8e09-c5d840d0eac5\" $permissionName = \"Data.Read\" $logAppSpn = Get-MgServicePrincipal -Filter \"appId eq '$logAppId'\" $appRole = $logAppSpn.AppRoles | Where-Object {$_.Value -eq $permissionName} Lastly, I need the ID of my Managed Identity. Get this either through the portal, or with PowerShell:\n$msi = Get-MgServicePrincipal -Filter \"displayName eq 'my-app-name'\" Note that by convention, a System-Assigned Managed Identity carries the same Display Name as the resource to which it belongs. This is not the case for User-Assigned Managed Identities. Update the script accordingly.\nNow that I have all the required IDs, I can grant access to the Log Analytics API for my Managed Identity:\nNew-MgServicePrincipalAppRoleAssignment -ServicePrincipalId $msi.Id -ResourceId $logAppSpn.Id -AppRoleId $appRole.Id -PrincipalId $msi.Id Calling the API Now that my application has the right permissions, all that is left is to get an access token and make my API call. To do so, call the built-in access token endpoint, or use the Azure.Identity SDK. In my case, I had to go the manual route. My function app did grant me the token endpoint, through the environment variable $env:IDENTITY_ENDPOINT. I also needed to provide the identity header, which is $env:IDENTITY_HEADER. With these two variables, I can get an access token from the token endpoint. The following PowerShell script does just that, and returns the access token in the variable $tokenResponse.access_token.\n$resource = \"https://api.loganalytics.io\" $tokenEndpoint = \"$($env:IDENTITY_ENDPOINT)?resource=$resource\u0026api-version=2019-08-01\" $tokenHeaders = @{ \"X-IDENTITY-HEADER\" = $env:IDENTITY_HEADER } $tokenResponse = Invoke-RestMethod -Method Get -Uri $tokenEndpoint -Headers $tokenHeaders $accessToken = $tokenResponse.access_token All that was left now was to call the API and get the extra information I need to generate a meaningful alert. Simply call the API with the access token in the authorization header, and you’re good to go.\n$linkToFilteredSearchResultsAPI = \"https://api.loganalytics.io/v1/workspaces/(...)\" $response = Invoke-RestMethod -Method Get -Uri $linkToFilteredSearchResultsAPI -Headers @ { Authorization = \"Bearer $accessToken\" } Conclusion With this info, you should now be able to easily extend your alert data with the original log rows by accessing the Log Analytics API with the Managed Identity of a Function App or Logic App. Using the Microsoft Graph module, you grant the identity the right Entra ID API permissions to access the Log Analytics API. After that, simply get an access token, and call the URI that you so graciously received from Azure Monitor.\n",
+  "wordCount" : "1016",
+  "inLanguage": "en",
+  "datePublished": "2024-01-23T18:37:02+01:00",
+  "dateModified": "2024-01-23T18:37:02+01:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://sswart.github.io/post/mi-loganalyticsapi/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Jesse Swart Coding Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sswart.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://sswart.github.io/" accesskey="h" title="Jesse Swart Coding Blog (Alt + H)">Jesse Swart Coding Blog</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Access the Log Analytics API with Managed Identity
+    </h1>
+    <div class="post-meta">&lt;span title=&#39;2024-01-23 18:37:02 &#43;0100 CET&#39;&gt;January 23, 2024&lt;/span&gt;
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="extending-your-alerts-with-additional-data-from-the-log-analytics-api">Extending your alerts with additional data from the Log Analytics API<a hidden class="anchor" aria-hidden="true" href="#extending-your-alerts-with-additional-data-from-the-log-analytics-api">#</a></h1>
+<p>I recently came accross a scenario where I needed to extend the data that was available in an alert. The alert data that was sent in the <code>actiongroup</code> only contained an <code>EventId</code> field. I was not at liberty to modify the alert, but I did notice an interesting extra property in the payload. The payload looked something like this:</p>
+<pre tabindex="0"><code>{
+    &#34;schemaId&#34;: &#34;azureMonitorCommonAlertSchema&#34;,
+    &#34;data&#34;: {
+        &#34;essentials&#34;: {
+            &#34;alertId&#34;: &#34;/subscriptions/&lt;subscriptionId&gt;/providers/Microsoft.AlertsManagement/alerts/&lt;alertId&gt;&#34;,
+            &#34;alertRule&#34;: &#34;&lt;MyAlertRule&gt;&#34;,
+            (...)
+        },
+        &#34;alertContext&#34;: {
+            &#34;properties&#34;: null,
+            &#34;conditionType&#34;: &#34;LogQueryCriteria&#34;,
+            &#34;condition&#34;: {
+                &#34;windowSize&#34;: &#34;PT5M&#34;,
+                &#34;allOf&#34;: [
+                    {
+                        &#34;searchQuery&#34;: &#34;AzureActivity | where OperationNameValue startswith \&#34;MICROSOFT AUTHORIZATION/ROLEASSIGNMENTSCHEDULEREQUESTS\&#34; | where ActivityStatusValue has \&#34;Start\&#34; | where Properties has \&#34;requestBody\&#34;&#34;,
+                        &#34;metricMeasureColumn&#34;: null,
+                        &#34;targetResourceTypes&#34;: null,
+                        &#34;operator&#34;: &#34;GreaterThan&#34;,
+                        &#34;threshold&#34;: &#34;0&#34;,
+                        &#34;timeAggregation&#34;: &#34;Count&#34;,
+                        &#34;dimensions&#34;: [
+                            {
+                                &#34;name&#34;: &#34;EventDataId&#34;,
+                                &#34;value&#34;: &#34;&lt;An Id&gt;&#34;
+                            }
+                        ],
+                        &#34;metricValue&#34;: 1,
+                        &#34;failingPeriods&#34;: {
+                            &#34;numberOfEvaluationPeriods&#34;: 1,
+                            &#34;minFailingPeriodsToAlert&#34;: 1
+                        },
+                        &#34;linkToSearchResultsUI&#34;: &#34;&lt;A link to the search results&gt;&#34;,
+                        &#34;linkToFilteredSearchResultsUI&#34;: &#34;&lt;A link to the filtered search results&gt;&#34;,
+                        &#34;linkToSearchResultsAPI&#34;: &#34;&lt;A link to the search results&gt;&#34;,
+                        &#34;linkToFilteredSearchResultsAPI&#34;: &#34;https://api.loganalytics.io/v1/workspaces/(...)&#34;
+                    }
+                ],
+                (...)
+            }
+        },
+        &#34;customProperties&#34;: null
+    }
+}
+</code></pre><p>If I want to handle this alert, all I really get is an <code>EventDataId</code>. Sure, I can add some context based on the name of the alert, or the query, but what I would really like is to provide some relevant info from the logs that triggered this alert. Luckily, the payload already points me in the right direction. The <code>linkToFilteredSearchResultsAPI</code> property contains a link to the exact logs that triggered this alert. All I need to do is to call this API and I can get the data I need.</p>
+<h2 id="the-challenge">The challenge<a hidden class="anchor" aria-hidden="true" href="#the-challenge">#</a></h2>
+<p>The challenge is calling this API, which requires an authenticated principal. In my case, I was running in an Azure Function, and I wanted to use a Managed Identity to authenticate against the API. A similar case would be handling alerts in a logic app.</p>
+<p>In both cases, I want the identity of the function or logic app to be used to authenticate against the API. Instead of using a service principal with a client secret, I just want to use the Managed Identity that is easily created out of the box. This is a bit more challenging than it sounds.</p>
+<h2 id="the-solution">The solution<a hidden class="anchor" aria-hidden="true" href="#the-solution">#</a></h2>
+<p>The link I got in the payload is pointing to <code>https://api.loganalytics.io</code>, which the is Azure Log Analytics API. To access this, my Managed Identity needs to be granted access to the API through Microsoft Entra ID. Besides that, my Managed Identity needs to be granted access to the Log Analytics workspace. This is done through the Azure RBAC system, using the &lsquo;Log Analytics Reader&rsquo; role.</p>
+<p>The latter part is relatively simple, and can be done through any conventional means, like bicep or the Azure Portal. The first part is a bit more challenging. When I looked at the Enterprise App in Entra ID, I noticed that it is not actually possible to grant access through the portal. Instead, I had to resort to PowerShell, using the Microsoft Graph module.</p>
+<p>The Microsoft Graph module is a bit of a pain to work with, since the documentation is fairly limited. I often find pieces of information on the old Azure AD PowerShell module, which usually translate decently well to the Microsoft Graph module. After consulting the documentation to get the right signatures, and some trial and error, I managed to get the right PowerShell script to grant access to the Log Analytics API for my Managed Identity.</p>
+<p>First, I needed to get the ID of the Log Analytics API resource in Entra ID. This is a static id, and can be retrieved through the portal. It is <code>ca7f3f0b-7d91-482c-8e09-c5d840d0eac5</code>. Next, I needed to get the ID of the AppRole that allows another app to access the Log Analytics API. This is a bit more challenging, but can be done through the following PowerShell command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$logAppId = <span style="color:#e6db74">&#34;ca7f3f0b-7d91-482c-8e09-c5d840d0eac5&#34;</span>
+</span></span><span style="display:flex;"><span>$permissionName = <span style="color:#e6db74">&#34;Data.Read&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$logAppSpn = Get-MgServicePrincipal -Filter <span style="color:#e6db74">&#34;appId eq &#39;</span>$logAppId<span style="color:#e6db74">&#39;&#34;</span>
+</span></span><span style="display:flex;"><span>$appRole = $logAppSpn.AppRoles | Where-Object {$_.Value <span style="color:#f92672">-eq</span> $permissionName}
+</span></span></code></pre></div><p>Lastly, I need the ID of my Managed Identity. Get this either through the portal, or with PowerShell:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$msi = Get-MgServicePrincipal -Filter <span style="color:#e6db74">&#34;displayName eq &#39;my-app-name&#39;&#34;</span>
+</span></span></code></pre></div><p>Note that by convention, a System-Assigned Managed Identity carries the same Display Name as the resource to which it belongs. This is not the case for User-Assigned Managed Identities. Update the script accordingly.</p>
+<p>Now that I have all the required IDs, I can grant access to the Log Analytics API for my Managed Identity:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>New-MgServicePrincipalAppRoleAssignment -ServicePrincipalId $msi.Id -ResourceId $logAppSpn.Id -AppRoleId $appRole.Id -PrincipalId $msi.Id
+</span></span></code></pre></div><h2 id="calling-the-api">Calling the API<a hidden class="anchor" aria-hidden="true" href="#calling-the-api">#</a></h2>
+<p>Now that my application has the right permissions, all that is left is to get an access token and make my API call. To do so, call the built-in access token endpoint, or use the Azure.Identity SDK. In my case, I had to go the manual route. My function app did grant me the token endpoint, through the environment variable <code>$env:IDENTITY_ENDPOINT</code>. I also needed to provide the identity header, which is <code>$env:IDENTITY_HEADER</code>. With these two variables, I can get an access token from the token endpoint. The following PowerShell script does just that, and returns the access token in the variable <code>$tokenResponse.access_token</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$resource = <span style="color:#e6db74">&#34;https://api.loganalytics.io&#34;</span>
+</span></span><span style="display:flex;"><span>$tokenEndpoint = <span style="color:#e6db74">&#34;</span>$($env:IDENTITY_ENDPOINT)<span style="color:#e6db74">?resource=</span>$resource<span style="color:#e6db74">&amp;api-version=2019-08-01&#34;</span>
+</span></span><span style="display:flex;"><span>$tokenHeaders = @{ <span style="color:#e6db74">&#34;X-IDENTITY-HEADER&#34;</span> = $env:IDENTITY_HEADER }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$tokenResponse = Invoke-RestMethod -Method Get -Uri $tokenEndpoint -Headers $tokenHeaders
+</span></span><span style="display:flex;"><span>$accessToken = $tokenResponse.access_token
+</span></span></code></pre></div><p>All that was left now was to call the API and get the extra information I need to generate a meaningful alert. Simply call the API with the access token in the authorization header, and you&rsquo;re good to go.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>$linkToFilteredSearchResultsAPI = <span style="color:#e6db74">&#34;https://api.loganalytics.io/v1/workspaces/(...)&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$response = Invoke-RestMethod -Method Get -Uri $linkToFilteredSearchResultsAPI -Headers @ { Authorization = <span style="color:#e6db74">&#34;Bearer </span>$accessToken<span style="color:#e6db74">&#34;</span> }
+</span></span></code></pre></div><h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
+<p>With this info, you should now be able to easily extend your alert data with the original log rows by accessing the Log Analytics API with the Managed Identity of a Function App or Logic App. Using the Microsoft Graph module, you grant the identity the right Entra ID API permissions to access the Log Analytics API. After that, simply get an access token, and call the URI that you so graciously received from Azure Monitor.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://sswart.github.io/tags/azure/">azure</a></li>
+      <li><a href="https://sswart.github.io/tags/alert/">alert</a></li>
+      <li><a href="https://sswart.github.io/tags/log-analytics/">log analytics</a></li>
+      <li><a href="https://sswart.github.io/tags/monitor/">monitor</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://sswart.github.io/">Jesse Swart Coding Blog</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

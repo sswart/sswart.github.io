@@ -14,7 +14,7 @@ Maybe something security related, security is always an important aspect of crea
 <meta name="author" content="">
 <link rel="canonical" href="https://sswart.github.io/post/five-easy-devsecops-steps/" />
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.5b9ae0304f93db6cc493f51846f012428af399c614b4f2fbdb7fa59dd4d5ef5b.js" integrity="sha256-W5rgME&#43;T22zEk/UYRvASQorzmcYUtPL723&#43;lndTV71s="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://sswart.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://sswart.github.io/favicon-16x16.png">
@@ -23,7 +23,7 @@ Maybe something security related, security is always an important aspect of crea
 <link rel="mask-icon" href="https://sswart.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.90.1" />
+<meta name="generator" content="Hugo 0.121.2">
 <noscript>
     <style>
         #theme-toggle,
@@ -108,7 +108,7 @@ Maybe something security related, security is always an important aspect of crea
   "keywords": [
     
   ],
-  "articleBody": "The DevOps movement has claimed it’s rightful place in our hearts. If it hasn’t, go read up on it. Working in a proper DevOps environment is amazing, and I cannot recommend enough for any organization to try it.\nBut, let’s be real. DevOps has been around for a while. It is not the shiny new thing it used to be anymore.\nWe need something new.\nMaybe something security related, security is always an important aspect of creating software. Moreover, I definitely would not want my organization to leak the source code for a few of our big products. Maybe we can piggyback onto the DevOps train, and claim to improve it on the way? The term DevOps was coined as the combination between Development and Operations. Three letters, so let’s abbreviate security as well. Sec. We just put it in there somewhere, so we will call it DevSecOps, or SecDevOps, or DevOpsSec. Whichever order we put them in, now that the letters ‘sec’ are part of our abbreviation, we can finally make our software and processes secure. All of those critical security fixes that were denied because security was not in the name can finally be merged! Because you know, if it is not explicitly mentioned, you should not think about it or do it.\nSpeaking of explicitly mentioning things, having our software be reliable is probably also important. What if that application we made for the national bank suddenly falls over, and nobody is able to access their money? We cannot have that. We will have to add it. Reliability, three letters. That gives us Rel. DevRelSecOps.\nWe can go on and on with this, there is so many things important that should be considered that are not explicitly mentioned. So where does it end? If we don’t watch out, we might end up with a massive franken-abbreviation like DevRelPerfSusAgiSecBizOps.\nSoftware and everything around it should be secure by default. It is one of the key pillars, as is performance, as is business focus as are other things. Do we really have to mention explicitly that something is part of our way of working to do it, and do it well?\nSo how can you get started with doing DevOps securely? Here’s five easy steps to get you started.\n  Use a secret manager like Azure Keyvault with managed identity in your application to store any secrets, certificates and keys in a central place and access them securely. This way, even if your machine is compromised, the chance of your secrets leaking is reduced.\n  Use a secret scanning tool like Github’s built in secret scanning, or gitleaks to prevent any secrets from being committed to your main branch. Automate this, so preferably use it in your pipelines\n  Scan your external dependencies (eg packages) for security issues and outdated versions and keep them up to date with tools like SonarCloud\n  Scan your own compiled binaries/artifacts for potential vulerabilities . For instance using Nexus Scan\n  Use Privileged Identity Management to manage access to production infrastructure and data. Nobody has access by default, but can easily gain access without too much slowdown, and it leaves an audit trail for whoever touched production.\n  ",
+  "articleBody": "The DevOps movement has claimed it’s rightful place in our hearts. If it hasn’t, go read up on it. Working in a proper DevOps environment is amazing, and I cannot recommend enough for any organization to try it.\nBut, let’s be real. DevOps has been around for a while. It is not the shiny new thing it used to be anymore.\nWe need something new.\nMaybe something security related, security is always an important aspect of creating software. Moreover, I definitely would not want my organization to leak the source code for a few of our big products. Maybe we can piggyback onto the DevOps train, and claim to improve it on the way? The term DevOps was coined as the combination between Development and Operations. Three letters, so let’s abbreviate security as well. Sec. We just put it in there somewhere, so we will call it DevSecOps, or SecDevOps, or DevOpsSec. Whichever order we put them in, now that the letters ‘sec’ are part of our abbreviation, we can finally make our software and processes secure. All of those critical security fixes that were denied because security was not in the name can finally be merged! Because you know, if it is not explicitly mentioned, you should not think about it or do it.\nSpeaking of explicitly mentioning things, having our software be reliable is probably also important. What if that application we made for the national bank suddenly falls over, and nobody is able to access their money? We cannot have that. We will have to add it. Reliability, three letters. That gives us Rel. DevRelSecOps.\nWe can go on and on with this, there is so many things important that should be considered that are not explicitly mentioned. So where does it end? If we don’t watch out, we might end up with a massive franken-abbreviation like DevRelPerfSusAgiSecBizOps.\nSoftware and everything around it should be secure by default. It is one of the key pillars, as is performance, as is business focus as are other things. Do we really have to mention explicitly that something is part of our way of working to do it, and do it well?\nSo how can you get started with doing DevOps securely? Here’s five easy steps to get you started.\nUse a secret manager like Azure Keyvault with managed identity in your application to store any secrets, certificates and keys in a central place and access them securely. This way, even if your machine is compromised, the chance of your secrets leaking is reduced.\nUse a secret scanning tool like Github’s built in secret scanning, or gitleaks to prevent any secrets from being committed to your main branch. Automate this, so preferably use it in your pipelines\nScan your external dependencies (eg packages) for security issues and outdated versions and keep them up to date with tools like SonarCloud\nScan your own compiled binaries/artifacts for potential vulerabilities . For instance using Nexus Scan\nUse Privileged Identity Management to manage access to production infrastructure and data. Nobody has access by default, but can easily gain access without too much slowdown, and it leaves an audit trail for whoever touched production.\n",
   "wordCount" : "529",
   "inLanguage": "en",
   "datePublished": "2022-07-17T15:50:15+02:00",
@@ -180,7 +180,7 @@ Maybe something security related, security is always an important aspect of crea
     <h1 class="post-title">
       Five easy steps to get started with secure DevOps
     </h1>
-    <div class="post-meta"><span title='2022-07-17 15:50:15 +0200 CEST'>July 17, 2022</span>
+    <div class="post-meta">&lt;span title=&#39;2022-07-17 15:50:15 &#43;0200 CEST&#39;&gt;July 17, 2022&lt;/span&gt;
 
 </div>
   </header> 
@@ -189,7 +189,7 @@ Maybe something security related, security is always an important aspect of crea
 <p>We need something new.</p>
 <p>Maybe something security related, security is always an important aspect of creating software. Moreover, I definitely would not want my organization to <a href="%22https://www.techradar.com/news/microsoft-may-be-the-latest-victim-of-lapsusdollar%22">leak the source code</a> for a few of our big products.
 Maybe we can piggyback onto the DevOps train, and claim to improve it on the way?
-The term DevOps was coined as the combination between Development and Operations. 
+The term DevOps was coined as the combination between Development and Operations.
 Three letters, so let&rsquo;s abbreviate security as well. Sec.
 We just put it in there somewhere, so we will call it DevSecOps, or SecDevOps, or DevOpsSec.
 Whichever order we put them in, now that the letters &lsquo;sec&rsquo; are part of our abbreviation, we can finally make our software and processes secure. All of those critical security fixes that were denied because security was not in the name can finally be merged! Because you know, if it is not explicitly mentioned, you should not think about it or do it.</p>
@@ -224,7 +224,7 @@ Whichever order we put them in, now that the letters &lsquo;sec&rsquo; are part 
     </main>
     
 <footer class="footer">
-    <span>&copy; 2023 <a href="https://sswart.github.io/">Jesse Swart Coding Blog</a></span>
+    <span>&copy; 2024 <a href="https://sswart.github.io/">Jesse Swart Coding Blog</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

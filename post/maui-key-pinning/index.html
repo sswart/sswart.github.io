@@ -12,7 +12,7 @@ Luckily, we can improve protection against these by using certificate pinning, o
 <meta name="author" content="">
 <link rel="canonical" href="https://sswart.github.io/post/maui-key-pinning/" />
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.5b9ae0304f93db6cc493f51846f012428af399c614b4f2fbdb7fa59dd4d5ef5b.js" integrity="sha256-W5rgME&#43;T22zEk/UYRvASQorzmcYUtPL723&#43;lndTV71s="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://sswart.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://sswart.github.io/favicon-16x16.png">
@@ -21,7 +21,7 @@ Luckily, we can improve protection against these by using certificate pinning, o
 <link rel="mask-icon" href="https://sswart.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.90.1" />
+<meta name="generator" content="Hugo 0.121.2">
 <noscript>
     <style>
         #theme-toggle,
@@ -102,7 +102,7 @@ Luckily, we can improve protection against these by using certificate pinning, o
   "keywords": [
     
   ],
-  "articleBody": "dotnet MAUI public key pinning When it comes to client-side security, mobile apps can be a double-edged sword. On the one hand, the software is on a user-controlled device, so security is out of your hands. On the other hand, that device will probably connect to any old public wifi that it can get its hands on. Man-in-the-middle attacks are a definite risk.\nLuckily, we can improve protection against these by using certificate pinning, or public key pinning. Instead of saying that a certificate that matches a domain suffices, we want to make sure that it is in fact the right back-end that we are talking to. By pinning the public key of our back-end api certificate, essentially having a local copy of sorts, and comparing that with the actual public key for each request that we make, we can be more sure that it is in fact our back-end, and not some spoofed version of it.\n Caution: this requires proper maintenance. If you ever change your certificate on the back-end side and you forget to update your client app, it will no longer be able to communicate with your back-end.\n Here’s how to do it in your dotnet MAUI application for Android and iOS. First off, we need the public key of our certificate. Preferably hashed with SHA256. This can be easily achieved using openssl. The following command will give us the hashed public key: openssl s_client -connect www.yourdomain.com:443 | openssl x509 -pubkey -noout | openssl rsa -pubin -outform der | openssl dgst -sha256 -binary | openssl enc -base64.\nNow we will take this hash and configure both of our platforms to verify the keys. There is multiple ways to achieve this. You can implement your own custom implementations of the native NSURlSessionHandler (iOS) and AndroidMessageHandler classes, and provide them using an implementation of IHttpsClientHandlerService. But there is an easier way.\nBoth the Android and iOS platforms offer a built-in way to add certificate pinning. These work just fine with MAUI. Why write your own code when it’s already available and built-in. For Android add a file called network_security_config.xml in a folder xml in your Android resources folder. Which can be found under Platform/Android/Resources. If the xml folder does not exist yet, create it.\nAdd the following to the file:\n    includeSubdomains=\"true\"example.com  expiration=\"2022-12-31\"  digest=\"SHA-256\"7HIpactkIAq2Y49orFOOQKurWxmmSFZhBCoQYcRhJ3Y=    Replace example.com with your domain, and replace the pin with the public key hash that you just made. The pin-set element is a collection, when you plan on updating your certificate, add the updated public key to this set and roll it out to your users before updating it server-side. This way, your users won’t experience any downtime.\nFind the official docs on certificate pinning for Android here.\nFor iOS, we add the following to the Info.plist file, which can be found under Platforms/iOS/Info.plist.\nNSAppTransportSecurity  NSPinnedDomains  example.org  NSIncludesSubdomains  NSPinnedCAIdentities   SPKI-SHA256-BASE64 7HIpactkIAq2Y49orFOOQKurWxmmSFZhBCoQYcRhJ3Y=      Again NSPinnedDomains is a collection to which you can add multiple items. To support a future/backup key, simply add an additional example.org with the other hash. You can find more about this in the official iOS documentation here.\nOnce you have these changes in place, you are all set. You can simulate an invalid public key by changing a letter in your hash, and attempting to connect to your back-end. Both Android and iOS should throw a native exception telling you the pinned key does not match. You have now made it harder for a man-in-the-middle to spoof your back-end to get valuable data from your app!\n",
+  "articleBody": "dotnet MAUI public key pinning When it comes to client-side security, mobile apps can be a double-edged sword. On the one hand, the software is on a user-controlled device, so security is out of your hands. On the other hand, that device will probably connect to any old public wifi that it can get its hands on. Man-in-the-middle attacks are a definite risk.\nLuckily, we can improve protection against these by using certificate pinning, or public key pinning. Instead of saying that a certificate that matches a domain suffices, we want to make sure that it is in fact the right back-end that we are talking to. By pinning the public key of our back-end api certificate, essentially having a local copy of sorts, and comparing that with the actual public key for each request that we make, we can be more sure that it is in fact our back-end, and not some spoofed version of it.\nCaution: this requires proper maintenance. If you ever change your certificate on the back-end side and you forget to update your client app, it will no longer be able to communicate with your back-end.\nHere’s how to do it in your dotnet MAUI application for Android and iOS. First off, we need the public key of our certificate. Preferably hashed with SHA256. This can be easily achieved using openssl. The following command will give us the hashed public key: openssl s_client -connect www.yourdomain.com:443 | openssl x509 -pubkey -noout | openssl rsa -pubin -outform der | openssl dgst -sha256 -binary | openssl enc -base64.\nNow we will take this hash and configure both of our platforms to verify the keys. There is multiple ways to achieve this. You can implement your own custom implementations of the native NSURlSessionHandler (iOS) and AndroidMessageHandler classes, and provide them using an implementation of IHttpsClientHandlerService. But there is an easier way.\nBoth the Android and iOS platforms offer a built-in way to add certificate pinning. These work just fine with MAUI. Why write your own code when it’s already available and built-in. For Android add a file called network_security_config.xml in a folder xml in your Android resources folder. Which can be found under Platform/Android/Resources. If the xml folder does not exist yet, create it.\nAdd the following to the file:\n\u003c?xml version=\"1.0\" encoding=\"utf-8\"?\u003e ",
   "wordCount" : "604",
   "inLanguage": "en",
   "datePublished": "2022-07-31T14:03:34+02:00",
@@ -174,7 +174,7 @@ Luckily, we can improve protection against these by using certificate pinning, o
     <h1 class="post-title">
       dotnet MAUI public key pinning
     </h1>
-    <div class="post-meta"><span title='2022-07-31 14:03:34 +0200 CEST'>July 31, 2022</span>
+    <div class="post-meta">&lt;span title=&#39;2022-07-31 14:03:34 &#43;0200 CEST&#39;&gt;July 31, 2022&lt;/span&gt;
 
 </div>
   </header> 
@@ -190,39 +190,39 @@ Luckily, we can improve protection against these by using certificate pinning, o
 <p><img loading="lazy" src="/images/maui-android-network-security-config.png" alt="network-security-config-location"  />
 </p>
 <p>Add the following to the file:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
-<span style="color:#f92672">&lt;network-security-config&gt;</span>
-    <span style="color:#f92672">&lt;domain-config&gt;</span>
-        <span style="color:#f92672">&lt;domain</span> <span style="color:#a6e22e">includeSubdomains=</span><span style="color:#e6db74">&#34;true&#34;</span><span style="color:#f92672">&gt;</span>example.com<span style="color:#f92672">&lt;/domain&gt;</span>
-        <span style="color:#f92672">&lt;pin-set</span> <span style="color:#a6e22e">expiration=</span><span style="color:#e6db74">&#34;2022-12-31&#34;</span><span style="color:#f92672">&gt;</span>
-            <span style="color:#f92672">&lt;pin</span> <span style="color:#a6e22e">digest=</span><span style="color:#e6db74">&#34;SHA-256&#34;</span><span style="color:#f92672">&gt;</span>7HIpactkIAq2Y49orFOOQKurWxmmSFZhBCoQYcRhJ3Y=<span style="color:#f92672">&lt;/pin&gt;</span>
-        <span style="color:#f92672">&lt;/pin-set&gt;</span>
-    <span style="color:#f92672">&lt;/domain-config&gt;</span>
-<span style="color:#f92672">&lt;/network-security-config&gt;</span>
-</code></pre></div><p>Replace <code>example.com</code> with your domain, and replace the pin with the public key hash that you just made. The <code>pin-set</code> element is a collection, when you plan on updating your certificate, add the updated public key to this set and roll it out to your users before updating it server-side. This way, your users won&rsquo;t experience any downtime.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;network-security-config&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;domain-config&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;domain</span> <span style="color:#a6e22e">includeSubdomains=</span><span style="color:#e6db74">&#34;true&#34;</span><span style="color:#f92672">&gt;</span>example.com<span style="color:#f92672">&lt;/domain&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;pin-set</span> <span style="color:#a6e22e">expiration=</span><span style="color:#e6db74">&#34;2022-12-31&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;pin</span> <span style="color:#a6e22e">digest=</span><span style="color:#e6db74">&#34;SHA-256&#34;</span><span style="color:#f92672">&gt;</span>7HIpactkIAq2Y49orFOOQKurWxmmSFZhBCoQYcRhJ3Y=<span style="color:#f92672">&lt;/pin&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/pin-set&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/domain-config&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/network-security-config&gt;</span>
+</span></span></code></pre></div><p>Replace <code>example.com</code> with your domain, and replace the pin with the public key hash that you just made. The <code>pin-set</code> element is a collection, when you plan on updating your certificate, add the updated public key to this set and roll it out to your users before updating it server-side. This way, your users won&rsquo;t experience any downtime.</p>
 <p>Find the official docs on certificate pinning for Android <a href="https://developer.android.com/training/articles/security-config#CertificatePinning">here</a>.</p>
 <p>For iOS, we add the following to the <code>Info.plist</code> file, which can be found under <code>Platforms/iOS/Info.plist</code>.</p>
 <p><img loading="lazy" src="/images/maui-ios-info-plist.png" alt="network-security-config-location"  />
 </p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;key&gt;</span>NSAppTransportSecurity<span style="color:#f92672">&lt;/key&gt;</span>
-<span style="color:#f92672">&lt;dict&gt;</span>
-    <span style="color:#f92672">&lt;key&gt;</span>NSPinnedDomains<span style="color:#f92672">&lt;/key&gt;</span>
-    <span style="color:#f92672">&lt;dict&gt;</span>
-        <span style="color:#f92672">&lt;key&gt;</span>example.org<span style="color:#f92672">&lt;/key&gt;</span>
-        <span style="color:#f92672">&lt;dict&gt;</span>
-            <span style="color:#f92672">&lt;key&gt;</span>NSIncludesSubdomains<span style="color:#f92672">&lt;/key&gt;</span>
-            <span style="color:#f92672">&lt;true/&gt;</span>
-            <span style="color:#f92672">&lt;key&gt;</span>NSPinnedCAIdentities<span style="color:#f92672">&lt;/key&gt;</span>
-            <span style="color:#f92672">&lt;array&gt;</span>
-                <span style="color:#f92672">&lt;dict&gt;</span>
-                    <span style="color:#f92672">&lt;key&gt;</span>SPKI-SHA256-BASE64<span style="color:#f92672">&lt;/key&gt;</span>
-                    <span style="color:#f92672">&lt;string&gt;</span>7HIpactkIAq2Y49orFOOQKurWxmmSFZhBCoQYcRhJ3Y=<span style="color:#f92672">&lt;/string&gt;</span>
-                <span style="color:#f92672">&lt;/dict&gt;</span>
-            <span style="color:#f92672">&lt;/array&gt;</span>
-        <span style="color:#f92672">&lt;/dict&gt;</span>
-    <span style="color:#f92672">&lt;/dict&gt;</span>
-<span style="color:#f92672">&lt;/dict&gt;</span>
-</code></pre></div><p>Again <code>NSPinnedDomains</code> is a collection to which you can add multiple items. To support a future/backup key, simply add an additional <code>&lt;key&gt;example.org&lt;/key&gt;</code> with the other hash. You can find more about this in the official iOS documentation <a href="https://developer.apple.com/news/?id=g9ejcf8y">here</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;key&gt;</span>NSAppTransportSecurity<span style="color:#f92672">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;dict&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;key&gt;</span>NSPinnedDomains<span style="color:#f92672">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;dict&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;key&gt;</span>example.org<span style="color:#f92672">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;dict&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;key&gt;</span>NSIncludesSubdomains<span style="color:#f92672">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;true/&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;key&gt;</span>NSPinnedCAIdentities<span style="color:#f92672">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;array&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;dict&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;key&gt;</span>SPKI-SHA256-BASE64<span style="color:#f92672">&lt;/key&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;string&gt;</span>7HIpactkIAq2Y49orFOOQKurWxmmSFZhBCoQYcRhJ3Y=<span style="color:#f92672">&lt;/string&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;/dict&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;/array&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/dict&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/dict&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dict&gt;</span>
+</span></span></code></pre></div><p>Again <code>NSPinnedDomains</code> is a collection to which you can add multiple items. To support a future/backup key, simply add an additional <code>&lt;key&gt;example.org&lt;/key&gt;</code> with the other hash. You can find more about this in the official iOS documentation <a href="https://developer.apple.com/news/?id=g9ejcf8y">here</a>.</p>
 <p>Once you have these changes in place, you are all set. You can simulate an invalid public key by changing a letter in your hash, and attempting to connect to your back-end. Both Android and iOS should throw a native exception telling you the pinned key does not match. You have now made it harder for a man-in-the-middle to spoof your back-end to get valuable data from your app!</p>
 
 
@@ -234,7 +234,7 @@ Luckily, we can improve protection against these by using certificate pinning, o
     </main>
     
 <footer class="footer">
-    <span>&copy; 2023 <a href="https://sswart.github.io/">Jesse Swart Coding Blog</a></span>
+    <span>&copy; 2024 <a href="https://sswart.github.io/">Jesse Swart Coding Blog</a></span>
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
