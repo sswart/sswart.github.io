@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>log analytics on Jesse Swart Coding Blog</title>
+    <title>Log Analytics on Jesse Swart Coding Blog</title>
     <link>https://sswart.github.io/tags/log-analytics/</link>
-    <description>Recent content in log analytics on Jesse Swart Coding Blog</description>
+    <description>Recent content in Log Analytics on Jesse Swart Coding Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 23 Jan 2024 18:37:02 +0100</lastBuildDate><atom:link href="https://sswart.github.io/tags/log-analytics/index.xml" rel="self" type="application/rss+xml" />

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Xamarin Development Setup Part 1 | Jesse Swart Coding Blog</title>
+<meta name="keywords" content="" />
+<meta name="description" content="Setting up Xamarin Forms Development for you and your team In this series we will be learning the steps to achieve a development setup with Xamarin that will enable you to develop quickly and securely, and also allow you to have some fun while doing it. Let&rsquo;s dive right in.
+Part 1. Initial project There are several ways to get started with Xamarin Forms. The easiest is probably to install Visual Studio (Visual Studio Community edition is free).">
+<meta name="author" content="">
+<link rel="canonical" href="https://sswart.github.io/post/xamarin-development-setup-part-1/" />
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.2eadbb982468c11a433a3e291f01326f2ba43f065e256bf792dbd79640a92316.js" integrity="sha256-Lq27mCRowRpDOj4pHwEybyukPwZeJWv3ktvXlkCpIxY="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://sswart.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://sswart.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://sswart.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://sswart.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://sswart.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.124.1">
+<link rel="alternate" hreflang="en" href="https://sswart.github.io/post/xamarin-development-setup-part-1/" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Xamarin Development Setup Part 1" />
+<meta property="og:description" content="Setting up Xamarin Forms Development for you and your team In this series we will be learning the steps to achieve a development setup with Xamarin that will enable you to develop quickly and securely, and also allow you to have some fun while doing it. Let&rsquo;s dive right in.
+Part 1. Initial project There are several ways to get started with Xamarin Forms. The easiest is probably to install Visual Studio (Visual Studio Community edition is free)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sswart.github.io/post/xamarin-development-setup-part-1/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-12-15T21:21:29&#43;01:00" />
+<meta property="article:modified_time" content="2021-12-15T21:21:29&#43;01:00" /><meta property="og:site_name" content="Software Engineering" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Xamarin Development Setup Part 1"/>
+<meta name="twitter:description" content="Setting up Xamarin Forms Development for you and your team In this series we will be learning the steps to achieve a development setup with Xamarin that will enable you to develop quickly and securely, and also allow you to have some fun while doing it. Let&rsquo;s dive right in.
+Part 1. Initial project There are several ways to get started with Xamarin Forms. The easiest is probably to install Visual Studio (Visual Studio Community edition is free)."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://sswart.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Xamarin Development Setup Part 1",
+      "item": "https://sswart.github.io/post/xamarin-development-setup-part-1/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Xamarin Development Setup Part 1",
+  "name": "Xamarin Development Setup Part 1",
+  "description": "Setting up Xamarin Forms Development for you and your team In this series we will be learning the steps to achieve a development setup with Xamarin that will enable you to develop quickly and securely, and also allow you to have some fun while doing it. Let\u0026rsquo;s dive right in.\nPart 1. Initial project There are several ways to get started with Xamarin Forms. The easiest is probably to install Visual Studio (Visual Studio Community edition is free).",
+  "keywords": [
+    
+  ],
+  "articleBody": "Setting up Xamarin Forms Development for you and your team In this series we will be learning the steps to achieve a development setup with Xamarin that will enable you to develop quickly and securely, and also allow you to have some fun while doing it. Let’s dive right in.\nPart 1. Initial project There are several ways to get started with Xamarin Forms. The easiest is probably to install Visual Studio (Visual Studio Community edition is free). Make sure to pick the ‘Mobile Development’ workload when installing.\nOnce Visual Studio is installed, open it, and choose ‘Create a new project’. Select ‘Mobile App (Xamarin Forms)’, choose a name and where you want to save it, and then choose a template. Don’t worry, you will be able to change this later. If you’re not sure which one to pick, go with ‘Flyout’. It is a common enough UI pattern for mobile apps and will likely do just fine for your purposes.\nThe project that was just generated contains some examples for you to explore. I won’t go into the details of these, but if you’re not familliar with Xamarin Forms see this as an opportunity to explore some basic features of the platform. Once you’re done exploring, feel free to remove any of the generated code that you do not need. Once you’ve deleted any code that you don’t need, run the project to make sure everything still works.\nI will try to refrain from telling you exactly how you could/should work with git in your work, but now would be a good time to make your first commit in the repository.\nEven though we now have a working, basic, solution, we are not quite there yet. To properly prove that everything we make works as intended (and keeps working as intended) we are going to add tests.\nGo ahead and add a unit test project to your solution. If you don’t know what unit tests are, or how to add a unit test project to a solution, I suggest you look up the basics. We won’t go into further details regarding unit tests in this series. Optionally, add an integration test project, which will simulate any communication with external dependencies to ensure everything stays compatible.\n“But wait”, I hear you saying. “A mobile app is a visual thing. How are we supposed to test that things like clicking a button will actually open a new screen”. That’s where Xamarin UITest comes in, we will dive into that in a future post. Until then, we will be adding an empty UI Test project and setup the prerequisites so that when the time comes, it will be easy to start writing UI tests. Feel free to skip this part if you feel UI Tests are redundant.\nAdd a new project to your solution and pick ‘Xamarin.UITest cross platform test project’. Follow the official docs to properly set everything up.\nThe last thing I would recommend you add is a dependency injection library or framework like TinyIoC or Autofac. In addition, consider using a framework like MvvmCross or Prism to get a lot of useful utilities out of the box, including dependency injection.\nCheck out an example project here\nNow that we have a solution that (hopefully) builds and runs, and includes all the means to write robust code, it’s time to setup our pipelines for Continuous Integration and/or Continuous Deployment/Delivery. We will tackle this in part 2.\n",
+  "wordCount" : "576",
+  "inLanguage": "en",
+  "datePublished": "2021-12-15T21:21:29+01:00",
+  "dateModified": "2021-12-15T21:21:29+01:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://sswart.github.io/post/xamarin-development-setup-part-1/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Jesse Swart Coding Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sswart.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://sswart.github.io/" accesskey="h" title="Jesse Swart Coding Blog (Alt + H)">Jesse Swart Coding Blog</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                </ul>
+            </span>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      Xamarin Development Setup Part 1<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>
+    </h1>
+    <div class="post-meta">&lt;span title=&#39;2021-12-15 21:21:29 &#43;0100 CET&#39;&gt;December 15, 2021&lt;/span&gt;
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="setting-up-xamarin-forms-development-for-you-and-your-team">Setting up Xamarin Forms Development for you and your team<a hidden class="anchor" aria-hidden="true" href="#setting-up-xamarin-forms-development-for-you-and-your-team">#</a></h1>
+<p>In this series we will be learning the steps to achieve a development setup with Xamarin that will enable you to develop quickly and securely, and also allow you to have some fun while doing it. Let&rsquo;s dive right in.</p>
+<h2 id="part-1-initial-project">Part 1. Initial project<a hidden class="anchor" aria-hidden="true" href="#part-1-initial-project">#</a></h2>
+<p>There are several ways to get started with Xamarin Forms. The easiest is probably to install Visual Studio (<a href="https://visualstudio.microsoft.com/vs/community/">Visual Studio Community edition is free</a>). Make sure to pick the &lsquo;Mobile Development&rsquo; workload when installing.</p>
+<p>Once Visual Studio is installed, open it, and choose &lsquo;Create a new project&rsquo;. Select &lsquo;Mobile App (Xamarin Forms)&rsquo;, choose a name and where you want to save it, and then choose a template. Don&rsquo;t worry, you will be able to change this later. If you&rsquo;re not sure which one to pick, go with &lsquo;Flyout&rsquo;. It is a common enough UI pattern for mobile apps and will likely do just fine for your purposes.</p>
+<p>The project that was just generated contains some examples for you to explore. I won&rsquo;t go into the details of these, but if you&rsquo;re not familliar with Xamarin Forms see this as an opportunity to explore some basic features of the platform. Once you&rsquo;re done exploring, feel free to remove any of the generated code that you do not need. Once you&rsquo;ve deleted any code that you don&rsquo;t need, run the project to make sure everything still works.</p>
+<p>I will try to refrain from telling you exactly how you could/should work with git in your work, but now would be a good time to make your first commit in the repository.</p>
+<p>Even though we now have a working, basic, solution, we are not quite there yet. To properly prove that everything we make works as intended (and keeps working as intended) we are going to add tests.</p>
+<p>Go ahead and add a unit test project to your solution. If you don&rsquo;t know what unit tests are, or how to add a unit test project to a solution, I suggest you look up the basics. We won&rsquo;t go into further details regarding unit tests in this series. Optionally, add an integration test project, which will simulate any communication with external dependencies to ensure everything stays compatible.</p>
+<p>&ldquo;But wait&rdquo;, I hear you saying. &ldquo;A mobile app is a visual thing. How are we supposed to test that things like clicking a button will actually open a new screen&rdquo;. That&rsquo;s where Xamarin UITest comes in, we will dive into that in a future post. Until then, we will be adding an empty UI Test project and setup the prerequisites so that when the time comes, it will be easy to start writing UI tests. Feel free to skip this part if you feel UI Tests are redundant.</p>
+<p>Add a new project to your solution and pick &lsquo;Xamarin.UITest cross platform test project&rsquo;. Follow <a href="https://docs.microsoft.com/en-us/appcenter/test-cloud/frameworks/uitest/">the official docs</a> to properly set everything up.</p>
+<p>The last thing I would recommend you add is a dependency injection library or framework like <a href="https://github.com/grumpydev/TinyIoC">TinyIoC</a> or <a href="https://github.com/autofac/Autofac">Autofac</a>. In addition, consider using a framework like <a href="https://github.com/MvvmCross/MvvmCross">MvvmCross</a> or <a href="https://github.com/PrismLibrary/Prism">Prism</a> to get a lot of useful utilities out of the box, including dependency injection.</p>
+<p>Check out an example project <a href="https://github.com/sswart/XamarinFormsStarter/tree/Blog-Part-1">here</a></p>
+<p>Now that we have a solution that (hopefully) builds and runs, and includes all the means to write robust code, it&rsquo;s time to setup our pipelines for Continuous Integration and/or Continuous Deployment/Delivery. We will tackle this in <a href="https://sswart.github.io/post/xamarin-development-setup-part-2/">part 2</a>.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="https://sswart.github.io/">Jesse Swart Coding Blog</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>azure devops on Jesse Swart Coding Blog</title>
+    <title>Azure DevOps on Jesse Swart Coding Blog</title>
     <link>https://sswart.github.io/tags/azure-devops/</link>
-    <description>Recent content in azure devops on Jesse Swart Coding Blog</description>
+    <description>Recent content in Azure DevOps on Jesse Swart Coding Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 08 Mar 2023 15:13:24 +0100</lastBuildDate><atom:link href="https://sswart.github.io/tags/azure-devops/index.xml" rel="self" type="application/rss+xml" />

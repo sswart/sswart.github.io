@@ -6,9 +6,45 @@
     <description>Recent content in Tags on Jesse Swart Coding Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 23 Jan 2024 18:37:02 +0100</lastBuildDate><atom:link href="https://sswart.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Jun 2024 13:47:56 +0200</lastBuildDate><atom:link href="https://sswart.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>alert</title>
+      <title>Conversion</title>
+      <link>https://sswart.github.io/tags/conversion/</link>
+      <pubDate>Wed, 19 Jun 2024 13:47:56 +0200</pubDate>
+      
+      <guid>https://sswart.github.io/tags/conversion/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Copilot</title>
+      <link>https://sswart.github.io/tags/copilot/</link>
+      <pubDate>Wed, 19 Jun 2024 13:47:56 +0200</pubDate>
+      
+      <guid>https://sswart.github.io/tags/copilot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data</title>
+      <link>https://sswart.github.io/tags/data/</link>
+      <pubDate>Wed, 19 Jun 2024 13:47:56 +0200</pubDate>
+      
+      <guid>https://sswart.github.io/tags/data/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Github</title>
+      <link>https://sswart.github.io/tags/github/</link>
+      <pubDate>Wed, 19 Jun 2024 13:47:56 +0200</pubDate>
+      
+      <guid>https://sswart.github.io/tags/github/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Alert</title>
       <link>https://sswart.github.io/tags/alert/</link>
       <pubDate>Tue, 23 Jan 2024 18:37:02 +0100</pubDate>
       
@@ -17,7 +53,7 @@
     </item>
     
     <item>
-      <title>azure</title>
+      <title>Azure</title>
       <link>https://sswart.github.io/tags/azure/</link>
       <pubDate>Tue, 23 Jan 2024 18:37:02 +0100</pubDate>
       
@@ -26,7 +62,7 @@
     </item>
     
     <item>
-      <title>log analytics</title>
+      <title>Log Analytics</title>
       <link>https://sswart.github.io/tags/log-analytics/</link>
       <pubDate>Tue, 23 Jan 2024 18:37:02 +0100</pubDate>
       
@@ -35,7 +71,7 @@
     </item>
     
     <item>
-      <title>monitor</title>
+      <title>Monitor</title>
       <link>https://sswart.github.io/tags/monitor/</link>
       <pubDate>Tue, 23 Jan 2024 18:37:02 +0100</pubDate>
       
@@ -44,7 +80,7 @@
     </item>
     
     <item>
-      <title>azure devops</title>
+      <title>Azure DevOps</title>
       <link>https://sswart.github.io/tags/azure-devops/</link>
       <pubDate>Wed, 08 Mar 2023 15:13:24 +0100</pubDate>
       
@@ -53,7 +89,7 @@
     </item>
     
     <item>
-      <title>pipeline</title>
+      <title>Pipeline</title>
       <link>https://sswart.github.io/tags/pipeline/</link>
       <pubDate>Wed, 08 Mar 2023 15:13:24 +0100</pubDate>
       

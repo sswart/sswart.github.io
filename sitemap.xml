@@ -2,6 +2,36 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://sswart.github.io/categories/</loc>
+    <lastmod>2024-06-19T13:47:56+02:00</lastmod>
+  </url><url>
+    <loc>https://sswart.github.io/tags/conversion/</loc>
+    <lastmod>2024-06-19T13:47:56+02:00</lastmod>
+  </url><url>
+    <loc>https://sswart.github.io/tags/copilot/</loc>
+    <lastmod>2024-06-19T13:47:56+02:00</lastmod>
+  </url><url>
+    <loc>https://sswart.github.io/categories/copilot/</loc>
+    <lastmod>2024-06-19T13:47:56+02:00</lastmod>
+  </url><url>
+    <loc>https://sswart.github.io/post/copilot-data-conversion/</loc>
+    <lastmod>2024-06-19T13:47:56+02:00</lastmod>
+  </url><url>
+    <loc>https://sswart.github.io/tags/data/</loc>
+    <lastmod>2024-06-19T13:47:56+02:00</lastmod>
+  </url><url>
+    <loc>https://sswart.github.io/tags/github/</loc>
+    <lastmod>2024-06-19T13:47:56+02:00</lastmod>
+  </url><url>
+    <loc>https://sswart.github.io/</loc>
+    <lastmod>2024-06-19T13:47:56+02:00</lastmod>
+  </url><url>
+    <loc>https://sswart.github.io/post/</loc>
+    <lastmod>2024-06-19T13:47:56+02:00</lastmod>
+  </url><url>
+    <loc>https://sswart.github.io/tags/</loc>
+    <lastmod>2024-06-19T13:47:56+02:00</lastmod>
+  </url><url>
     <loc>https://sswart.github.io/post/mi-loganalyticsapi/</loc>
     <lastmod>2024-01-23T18:37:02+01:00</lastmod>
   </url><url>
@@ -11,19 +41,10 @@
     <loc>https://sswart.github.io/tags/azure/</loc>
     <lastmod>2024-01-23T18:37:02+01:00</lastmod>
   </url><url>
-    <loc>https://sswart.github.io/</loc>
-    <lastmod>2024-01-23T18:37:02+01:00</lastmod>
-  </url><url>
     <loc>https://sswart.github.io/tags/log-analytics/</loc>
     <lastmod>2024-01-23T18:37:02+01:00</lastmod>
   </url><url>
     <loc>https://sswart.github.io/tags/monitor/</loc>
-    <lastmod>2024-01-23T18:37:02+01:00</lastmod>
-  </url><url>
-    <loc>https://sswart.github.io/post/</loc>
-    <lastmod>2024-01-23T18:37:02+01:00</lastmod>
-  </url><url>
-    <loc>https://sswart.github.io/tags/</loc>
     <lastmod>2024-01-23T18:37:02+01:00</lastmod>
   </url><url>
     <loc>https://sswart.github.io/post/azdo-renovate-spn-authentication/</loc>
@@ -56,6 +77,10 @@
     <loc>https://sswart.github.io/post/five-easy-devsecops-steps/</loc>
     <lastmod>2022-07-17T15:50:15+02:00</lastmod>
   </url><url>
-    <loc>https://sswart.github.io/categories/</loc>
+    <loc>https://sswart.github.io/post/xamarin-development-setup-part-2/</loc>
+    <lastmod>2021-12-17T13:41:44+01:00</lastmod>
+  </url><url>
+    <loc>https://sswart.github.io/post/xamarin-development-setup-part-1/</loc>
+    <lastmod>2021-12-15T21:21:29+01:00</lastmod>
   </url>
 </urlset>

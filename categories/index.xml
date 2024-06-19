@@ -5,6 +5,16 @@
     <link>https://sswart.github.io/categories/</link>
     <description>Recent content in Categories on Jesse Swart Coding Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://sswart.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Wed, 19 Jun 2024 13:47:56 +0200</lastBuildDate><atom:link href="https://sswart.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Copilot</title>
+      <link>https://sswart.github.io/categories/copilot/</link>
+      <pubDate>Wed, 19 Jun 2024 13:47:56 +0200</pubDate>
+      
+      <guid>https://sswart.github.io/categories/copilot/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

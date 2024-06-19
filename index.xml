@@ -6,7 +6,17 @@
     <description>Recent content on Jesse Swart Coding Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 23 Jan 2024 18:37:02 +0100</lastBuildDate><atom:link href="https://sswart.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Jun 2024 13:47:56 +0200</lastBuildDate><atom:link href="https://sswart.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Copilot Data Conversion</title>
+      <link>https://sswart.github.io/post/copilot-data-conversion/</link>
+      <pubDate>Wed, 19 Jun 2024 13:47:56 +0200</pubDate>
+      
+      <guid>https://sswart.github.io/post/copilot-data-conversion/</guid>
+      <description>Converting data to different formats with copilot Recently, I got a question from a client if GitHub Copilot would be able to convert data from a table designer tool into working test files. The answer is probably yes! The only requirement is that the table designer tool is able to export its table (or tables) into a textual format, like SQL, JSON or CSV.
+Here&amp;rsquo;s how you could achieve this with Copilot:</description>
+    </item>
+    
     <item>
       <title>Access the Log Analytics API with Managed Identity</title>
       <link>https://sswart.github.io/post/mi-loganalyticsapi/</link>
@@ -67,6 +77,26 @@ Luckily, we can improve protection against these by using certificate pinning, o
 But, let&amp;rsquo;s be real. DevOps has been around for a while. It is not the shiny new thing it used to be anymore.
 We need something new.
 Maybe something security related, security is always an important aspect of creating software.</description>
+    </item>
+    
+    <item>
+      <title>Xamarin Development Setup Part 2</title>
+      <link>https://sswart.github.io/post/xamarin-development-setup-part-2/</link>
+      <pubDate>Fri, 17 Dec 2021 13:41:44 +0100</pubDate>
+      
+      <guid>https://sswart.github.io/post/xamarin-development-setup-part-2/</guid>
+      <description>Xamarin Development Setup Part 2. Continuous Integration/Delivery With our initial solution in place, we will now start defining our build/deployment pipelines. So let us quickly sum up what we want our pipelines to do.
+First of all, we want to build the project and run our unit tests each and every time we make a commit, and before we are allowed to merge a pull request. We can do this quickly and often, as the build time is usually a measure of minutes, and so are the unit tests.</description>
+    </item>
+    
+    <item>
+      <title>Xamarin Development Setup Part 1</title>
+      <link>https://sswart.github.io/post/xamarin-development-setup-part-1/</link>
+      <pubDate>Wed, 15 Dec 2021 21:21:29 +0100</pubDate>
+      
+      <guid>https://sswart.github.io/post/xamarin-development-setup-part-1/</guid>
+      <description>Setting up Xamarin Forms Development for you and your team In this series we will be learning the steps to achieve a development setup with Xamarin that will enable you to develop quickly and securely, and also allow you to have some fun while doing it. Let&amp;rsquo;s dive right in.
+Part 1. Initial project There are several ways to get started with Xamarin Forms. The easiest is probably to install Visual Studio (Visual Studio Community edition is free).</description>
     </item>
     
   </channel>
