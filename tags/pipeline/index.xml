@@ -4,19 +4,18 @@
     <title>Pipeline on Jesse Swart Coding Blog</title>
     <link>https://sswart.github.io/tags/pipeline/</link>
     <description>Recent content in Pipeline on Jesse Swart Coding Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.124.1</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Mar 2023 15:13:24 +0100</lastBuildDate><atom:link href="https://sswart.github.io/tags/pipeline/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Mar 2023 15:13:24 +0100</lastBuildDate>
+    <atom:link href="https://sswart.github.io/tags/pipeline/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Azure DevOps Path Variable Pitfall</title>
       <link>https://sswart.github.io/post/azdo-variable-pitfall/</link>
       <pubDate>Wed, 08 Mar 2023 15:13:24 +0100</pubDate>
-      
       <guid>https://sswart.github.io/post/azdo-variable-pitfall/</guid>
       <description>Ever spent too much time debugging an issue that seemed impossible at first, but then turned out to be stupid? I have.
 Pipeline I was working on a pipeline. Just your run of the mill deployment pipeline really. I was trying to deploy some resources from a bicep template. It looked something like the following:
 variables: path: $(Build.SourcesDirectory)/agw-bicep agwName: &amp;#39;my-agw&amp;#39; agwRg: &amp;#39;my-agw-rg&amp;#39; kvName: &amp;#39;my-agw-kv&amp;#39; trigger: none pool: vmImage: ubuntu-latest jobs: - job: deploy pool: vmImage: ubuntu-latest timeoutInMinutes: 15 steps: - task: AzureCLI@2 displayName: &amp;#39;Call Azure Cli&amp;#39; inputs: azureSubscription: &amp;#39;&amp;lt;sub&amp;gt;&amp;#39; scriptType: &amp;#39;pscore&amp;#39; scriptLocation: &amp;#39;inlineScript&amp;#39; workingDirectory: $(oath) inlineScript: | (.</description>
     </item>
-    
   </channel>
 </rss>

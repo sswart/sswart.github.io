@@ -6,14 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Xamarin Development Setup Part 2 | Jesse Swart Coding Blog</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="Xamarin Development Setup Part 2. Continuous Integration/Delivery With our initial solution in place, we will now start defining our build/deployment pipelines. So let us quickly sum up what we want our pipelines to do.
 First of all, we want to build the project and run our unit tests each and every time we make a commit, and before we are allowed to merge a pull request. We can do this quickly and often, as the build time is usually a measure of minutes, and so are the unit tests.">
 <meta name="author" content="">
-<link rel="canonical" href="https://sswart.github.io/post/xamarin-development-setup-part-2/" />
-<link crossorigin="anonymous" href="/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.2eadbb982468c11a433a3e291f01326f2ba43f065e256bf792dbd79640a92316.js" integrity="sha256-Lq27mCRowRpDOj4pHwEybyukPwZeJWv3ktvXlkCpIxY="
-    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="canonical" href="https://sswart.github.io/post/xamarin-development-setup-part-2/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b609c58d5c11bb90b1a54e04005d74ad1ddf22165eb79f5533967e57df9c3b50.css" integrity="sha256-tgnFjVwRu5CxpU4EAF10rR3fIhZet59VM5Z&#43;V9&#43;cO1A=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://sswart.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://sswart.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://sswart.github.io/favicon-32x32.png">
@@ -21,8 +19,7 @@ First of all, we want to build the project and run our unit tests each and every
 <link rel="mask-icon" href="https://sswart.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.124.1">
-<link rel="alternate" hreflang="en" href="https://sswart.github.io/post/xamarin-development-setup-part-2/" />
+<link rel="alternate" hreflang="en" href="https://sswart.github.io/post/xamarin-development-setup-part-2/">
 <noscript>
     <style>
         #theme-toggle,
@@ -40,7 +37,7 @@ First of all, we want to build the project and run our unit tests each and every
                 --secondary: rgb(155, 156, 157);
                 --tertiary: rgb(65, 66, 68);
                 --content: rgb(196, 196, 197);
-                --hljs-bg: rgb(46, 46, 51);
+                --code-block-bg: rgb(46, 46, 51);
                 --code-bg: rgb(55, 56, 62);
                 --border: rgb(51, 51, 51);
             }
@@ -64,8 +61,8 @@ First of all, we want to build the project and run our unit tests each and every
 First of all, we want to build the project and run our unit tests each and every time we make a commit, and before we are allowed to merge a pull request. We can do this quickly and often, as the build time is usually a measure of minutes, and so are the unit tests." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://sswart.github.io/post/xamarin-development-setup-part-2/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-12-17T13:41:44&#43;01:00" />
-<meta property="article:modified_time" content="2021-12-17T13:41:44&#43;01:00" /><meta property="og:site_name" content="Software Engineering" />
+<meta property="article:published_time" content="2021-12-17T13:41:44+01:00" />
+<meta property="article:modified_time" content="2021-12-17T13:41:44+01:00" /><meta property="og:site_name" content="Software Engineering" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Xamarin Development Setup Part 2"/>
@@ -140,14 +137,14 @@ First of all, we want to build the project and run our unit tests each and every
     <nav class="nav">
         <div class="logo">
             <a href="https://sswart.github.io/" accesskey="h" title="Jesse Swart Coding Blog (Alt + H)">Jesse Swart Coding Blog</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -161,9 +158,7 @@ First of all, we want to build the project and run our unit tests each and every
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-                <ul class="lang-switch"><li>|</li>
-                </ul>
-            </span>
+            </div>
         </div>
         <ul id="menu">
         </ul>
@@ -174,10 +169,16 @@ First of all, we want to build the project and run our unit tests each and every
 <article class="post-single">
   <header class="post-header">
     
-    <h1 class="post-title">
-      Xamarin Development Setup Part 2<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>
+    <h1 class="post-title entry-hint-parent">
+      Xamarin Development Setup Part 2
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
     </h1>
-    <div class="post-meta">&lt;span title=&#39;2021-12-17 13:41:44 &#43;0100 CET&#39;&gt;December 17, 2021&lt;/span&gt;
+    <div class="post-meta"><span title='2021-12-17 13:41:44 +0100 CET'>December 17, 2021</span>
 
 </div>
   </header> 
@@ -215,16 +216,19 @@ First of all, we want to build the project and run our unit tests each and every
   </div>
 
   <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
   </footer>
 </article>
     </main>
     
 <footer class="footer">
-    <span>&copy; 2024 <a href="https://sswart.github.io/">Jesse Swart Coding Blog</a></span>
+        <span>&copy; 2024 <a href="https://sswart.github.io/">Jesse Swart Coding Blog</a></span> · 
+
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
     </span>
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

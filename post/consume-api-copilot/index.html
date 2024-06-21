@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Quickly Consume External APIs with GitHub Copilot | Jesse Swart Coding Blog</title>
+<meta name="keywords" content="">
+<meta name="description" content="Ever had to implement an external API that does have documentation, but does not offer an SDK or OpenAPI spec? GitHub Copilot is a really great tool to help with these kinds of conversions. In this post, I&rsquo;ll show you how to quickly consume an external API using GitHub Copilot.
+The problem I would like to use the OpenWeather API to get the current weather for a specific location. The API documentation is available at https://openweathermap.">
+<meta name="author" content="">
+<link rel="canonical" href="https://sswart.github.io/post/consume-api-copilot/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b609c58d5c11bb90b1a54e04005d74ad1ddf22165eb79f5533967e57df9c3b50.css" integrity="sha256-tgnFjVwRu5CxpU4EAF10rR3fIhZet59VM5Z&#43;V9&#43;cO1A=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://sswart.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://sswart.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://sswart.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://sswart.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://sswart.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://sswart.github.io/post/consume-api-copilot/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Quickly Consume External APIs with GitHub Copilot" />
+<meta property="og:description" content="Ever had to implement an external API that does have documentation, but does not offer an SDK or OpenAPI spec? GitHub Copilot is a really great tool to help with these kinds of conversions. In this post, I&rsquo;ll show you how to quickly consume an external API using GitHub Copilot.
+The problem I would like to use the OpenWeather API to get the current weather for a specific location. The API documentation is available at https://openweathermap." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://sswart.github.io/post/consume-api-copilot/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-06-21T09:51:32+02:00" />
+<meta property="article:modified_time" content="2024-06-21T09:51:32+02:00" /><meta property="og:site_name" content="Software Engineering" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Quickly Consume External APIs with GitHub Copilot"/>
+<meta name="twitter:description" content="Ever had to implement an external API that does have documentation, but does not offer an SDK or OpenAPI spec? GitHub Copilot is a really great tool to help with these kinds of conversions. In this post, I&rsquo;ll show you how to quickly consume an external API using GitHub Copilot.
+The problem I would like to use the OpenWeather API to get the current weather for a specific location. The API documentation is available at https://openweathermap."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://sswart.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Quickly Consume External APIs with GitHub Copilot",
+      "item": "https://sswart.github.io/post/consume-api-copilot/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Quickly Consume External APIs with GitHub Copilot",
+  "name": "Quickly Consume External APIs with GitHub Copilot",
+  "description": "Ever had to implement an external API that does have documentation, but does not offer an SDK or OpenAPI spec? GitHub Copilot is a really great tool to help with these kinds of conversions. In this post, I\u0026rsquo;ll show you how to quickly consume an external API using GitHub Copilot.\nThe problem I would like to use the OpenWeather API to get the current weather for a specific location. The API documentation is available at https://openweathermap.",
+  "keywords": [
+    
+  ],
+  "articleBody": "Ever had to implement an external API that does have documentation, but does not offer an SDK or OpenAPI spec? GitHub Copilot is a really great tool to help with these kinds of conversions. In this post, I’ll show you how to quickly consume an external API using GitHub Copilot.\nThe problem I would like to use the OpenWeather API to get the current weather for a specific location. The API documentation is available at https://openweathermap.org/current. The documentation for a single endpoint looks something like the following:\nThe documentation is pretty clear, however I am a lazy developer and I don’t want to be writing the code to consume this API myself. I would like to use GitHub Copilot to generate the code for me. I might even get the benefit of less human error.\nThe magic Let us assume I am trying to consume this API using a front end built in Typescript. I want to create a class that will handle the API calls for me. Of course, I want the responses to be strongly typed. GitHub Copilot is clever, but cannot read my mind. So I will need to be explicit about what I want.\nThere is another key piece of information that I will need to include, which is the documentation for the rest api. I will simply copy-paste the relevant parts of the documentation into my chat session, and let Copilot do the rest.\nThe end result is the following prompt:\nThe following is an api endpoint specification. Implement the typescript code to be able to consume the api. Include a type for the response and a service class that holds the logic to call the endpoint. Call current weather data How to make an API call API call https://api.openweathermap.org/data/2.5/weather?lat={lat}\u0026lon={lon}\u0026appid={API key} Parameters lat required Latitude. If you need the geocoder to automatic convert city names and zip-codes to geo coordinates and the other way around, please use our Geocoding API lon required Longitude. If you need the geocoder to automatic convert city names and zip-codes to geo coordinates and the other way around, please use our Geocoding API appid required Your unique API key (you can always find it on your account page under the \"API key\" tab) mode optional Response format. Possible values are xml and html. If you don't use the mode parameter format is JSON by default. Learn more units optional Units of measurement. standard, metric and imperial units are available. If you do not use the units parameter, standard units will be applied by default. Learn more lang optional You can use this parameter to get the output in your language. Learn more Please use Geocoder API if you need automatic convert city names and zip-codes to geo coordinates and the other way around. Please note that built-in geocoder has been deprecated. Although it is still available for use, bug fixing and updates are no longer available for this functionality. Examples of API calls https://api.openweathermap.org/data/2.5/weather?lat=44.34\u0026lon=10.99\u0026appid={API key} API response If you do not see some of the parameters in your API response it means that these weather phenomena are just not happened for the time of measurement for the city or location chosen. Only really measured or calculated data is displayed in API response. JSON JSON format API response example { \"coord\": { \"lon\": 10.99, \"lat\": 44.34 }, \"weather\": [ { \"id\": 501, \"main\": \"Rain\", \"description\": \"moderate rain\", \"icon\": \"10d\" } ], \"base\": \"stations\", \"main\": { \"temp\": 298.48, \"feels_like\": 298.74, \"temp_min\": 297.56, \"temp_max\": 300.05, \"pressure\": 1015, \"humidity\": 64, \"sea_level\": 1015, \"grnd_level\": 933 }, \"visibility\": 10000, \"wind\": { \"speed\": 0.62, \"deg\": 349, \"gust\": 1.18 }, \"rain\": { \"1h\": 3.16 }, \"clouds\": { \"all\": 100 }, \"dt\": 1661870592, \"sys\": { \"type\": 2, \"id\": 2075663, \"country\": \"IT\", \"sunrise\": 1661834187, \"sunset\": 1661882248 }, \"timezone\": 7200, \"id\": 3163858, \"name\": \"Zocca\", \"cod\": 200 } JSON format API response fields coord coord.lon Longitude of the location coord.lat Latitude of the location weather (more info Weather condition codes) weather.id Weather condition id weather.main Group of weather parameters (Rain, Snow, Clouds etc.) weather.description Weather condition within the group. Please find more here. You can get the output in your language. Learn more weather.icon Weather icon id base Internal parameter main main.temp Temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit main.feels_like Temperature. This temperature parameter accounts for the human perception of weather. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit main.pressure Atmospheric pressure on the sea level, hPa main.humidity Humidity, % main.temp_min Minimum temperature at the moment. This is minimal currently observed temperature (within large megalopolises and urban areas). Please find more info here. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit main.temp_max Maximum temperature at the moment. This is maximal currently observed temperature (within large megalopolises and urban areas). Please find more info here. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit main.sea_level Atmospheric pressure on the sea level, hPa main.grnd_level Atmospheric pressure on the ground level, hPa visibility Visibility, meter. The maximum value of the visibility is 10 km wind wind.speed Wind speed. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour wind.deg Wind direction, degrees (meteorological) wind.gust Wind gust. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour clouds clouds.all Cloudiness, % rain rain.1h (where available) Rain volume for the last 1 hour, mm. Please note that only mm as units of measurement are available for this parameter rain.3h (where available) Rain volume for the last 3 hours, mm. Please note that only mm as units of measurement are available for this parameter snow snow.1h(where available) Snow volume for the last 1 hour, mm. Please note that only mm as units of measurement are available for this parameter snow.3h (where available)Snow volume for the last 3 hours, mm. Please note that only mm as units of measurement are available for this parameter dt Time of data calculation, unix, UTC sys sys.type Internal parameter sys.id Internal parameter sys.message Internal parameter sys.country Country code (GB, JP etc.) sys.sunrise Sunrise time, unix, UTC sys.sunset Sunset time, unix, UTC timezone Shift in seconds from UTC id City ID. Please note that built-in geocoder functionality has been deprecated. Learn more here name City name. Please note that built-in geocoder functionality has been deprecated. Learn more here cod Internal parameter The first part are my instructions to Copilot. The second part is the documentation that I copied from the OpenWeather API documentation. This resulted in the following code:\nFirst, Copilot defined the response types:\ninterface Coord { lon: number; lat: number; } interface Weather { id: number; main: string; description: string; icon: string; } interface Main { temp: number; feels_like: number; temp_min: number; temp_max: number; pressure: number; humidity: number; sea_level: number; grnd_level: number; } interface Wind { speed: number; deg: number; gust: number; } interface Rain { '1h'?: number; '3h'?: number; } interface Clouds { all: number; } interface Sys { type: number; id: number; country: string; sunrise: number; sunset: number; } interface WeatherResponse { coord: Coord; weather: Weather[]; base: string; main: Main; visibility: number; wind: Wind; rain?: Rain; clouds: Clouds; dt: number; sys: Sys; timezone: number; id: number; name: string; cod: number; } Next, it defined the service class:\nimport axios from 'axios'; class WeatherService { private API_KEY = 'your_api_key_here'; // replace with your actual API key private BASE_URL = 'https://api.openweathermap.org/data/2.5/weather'; async getWeather(lat: number, lon: number): Promise\u003cWeatherResponse\u003e { const response = await axios.get(`${this.BASE_URL}?lat=${lat}\u0026lon=${lon}\u0026appid=${this.API_KEY}`); return response.data; } } It even mentioned a potential security hazard; the suggestion contains a hardcoded api key but instead I would probably want to reference a secret store somewhere, or get the api key from an environment variable.\nConclusion GitHub Copilot cannot only help you with code completions or with generating code based on specific instructions. It can also understand a raw copy paste of documentation, and generate code based on that. Saving you precious time and mental load.\n",
+  "wordCount" : "1292",
+  "inLanguage": "en",
+  "datePublished": "2024-06-21T09:51:32+02:00",
+  "dateModified": "2024-06-21T09:51:32+02:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://sswart.github.io/post/consume-api-copilot/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Jesse Swart Coding Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://sswart.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://sswart.github.io/" accesskey="h" title="Jesse Swart Coding Blog (Alt + H)">Jesse Swart Coding Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Quickly Consume External APIs with GitHub Copilot
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h1>
+    <div class="post-meta"><span title='2024-06-21 09:51:32 +0200 CEST'>June 21, 2024</span>
+
+</div>
+  </header> 
+  <div class="post-content"><p>Ever had to implement an external API that does have documentation, but does not offer an SDK or OpenAPI spec?
+GitHub Copilot is a really great tool to help with these kinds of conversions. In this post, I&rsquo;ll show you how to quickly consume an external API using GitHub Copilot.</p>
+<h2 id="the-problem">The problem<a hidden class="anchor" aria-hidden="true" href="#the-problem">#</a></h2>
+<p>I would like to use the OpenWeather API to get the current weather for a specific location. The API documentation is available at <a href="https://openweathermap.org/current">https://openweathermap.org/current</a>. The documentation for a single endpoint looks something like the following:</p>
+<p><img loading="lazy" src="/images/consume-api-copilot/request-doc.png" alt="Request documentation"  />
+
+<img loading="lazy" src="/images/consume-api-copilot/response-doc.png" alt="Response documentation"  />
+</p>
+<p>The documentation is pretty clear, however I am a lazy developer and I don&rsquo;t want to be writing the code to consume this API myself. I would like to use GitHub Copilot to generate the code for me. I might even get the benefit of less human error.</p>
+<h2 id="the-magic">The magic<a hidden class="anchor" aria-hidden="true" href="#the-magic">#</a></h2>
+<p>Let us assume I am trying to consume this API using a front end built in Typescript. I want to create a class that will handle the API calls for me. Of course, I want the responses to be strongly typed. GitHub Copilot is clever, but cannot read my mind. So I will need to be explicit about what I want.</p>
+<p>There is another key piece of information that I will need to include, which is the documentation for the rest api. I will simply copy-paste the relevant parts of the documentation into my chat session, and let Copilot do the rest.</p>
+<p>The end result is the following prompt:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>The following is an api endpoint specification. 
+</span></span><span style="display:flex;"><span>Implement the typescript code to be able to consume the api. 
+</span></span><span style="display:flex;"><span>Include a type for the response and a service class 
+</span></span><span style="display:flex;"><span>that holds the logic to call the endpoint.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Call current weather data How to make an API call API call
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>https://api.openweathermap.org/data/2.5/weather?lat={lat}&amp;lon={lon}&amp;appid={API key}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Parameters lat required Latitude. If you need the geocoder to automatic convert city names and zip-codes to geo coordinates and the other way around, please use our Geocoding API lon required Longitude. If you need the geocoder to automatic convert city names and zip-codes to geo coordinates and the other way around, please use our Geocoding API appid required Your unique API key (you can always find it on your account page under the &#34;API key&#34; tab) mode optional Response format. Possible values are xml and html. If you don&#39;t use the mode parameter format is JSON by default. Learn more units optional Units of measurement. standard, metric and imperial units are available. If you do not use the units parameter, standard units will be applied by default. Learn more lang optional You can use this parameter to get the output in your language. Learn more Please use Geocoder API if you need automatic convert city names and zip-codes to geo coordinates and the other way around.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Please note that built-in geocoder has been deprecated. Although it is still available for use, bug fixing and updates are no longer available for this functionality.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Examples of API calls
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>https://api.openweathermap.org/data/2.5/weather?lat=44.34&amp;lon=10.99&amp;appid={API key}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>API response If you do not see some of the parameters in your API response it means that these weather phenomena are just not happened for the time of measurement for the city or location chosen. Only really measured or calculated data is displayed in API response. JSON JSON format API response example
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{ &#34;coord&#34;: { &#34;lon&#34;: 10.99, &#34;lat&#34;: 44.34 }, &#34;weather&#34;: [ { &#34;id&#34;: 501, &#34;main&#34;: &#34;Rain&#34;, &#34;description&#34;: &#34;moderate rain&#34;, &#34;icon&#34;: &#34;10d&#34; } ], &#34;base&#34;: &#34;stations&#34;, &#34;main&#34;: { &#34;temp&#34;: 298.48, &#34;feels_like&#34;: 298.74, &#34;temp_min&#34;: 297.56, &#34;temp_max&#34;: 300.05, &#34;pressure&#34;: 1015, &#34;humidity&#34;: 64, &#34;sea_level&#34;: 1015, &#34;grnd_level&#34;: 933 }, &#34;visibility&#34;: 10000, &#34;wind&#34;: { &#34;speed&#34;: 0.62, &#34;deg&#34;: 349, &#34;gust&#34;: 1.18 }, &#34;rain&#34;: { &#34;1h&#34;: 3.16 }, &#34;clouds&#34;: { &#34;all&#34;: 100 }, &#34;dt&#34;: 1661870592, &#34;sys&#34;: { &#34;type&#34;: 2, &#34;id&#34;: 2075663, &#34;country&#34;: &#34;IT&#34;, &#34;sunrise&#34;: 1661834187, &#34;sunset&#34;: 1661882248 }, &#34;timezone&#34;: 7200, &#34;id&#34;: 3163858, &#34;name&#34;: &#34;Zocca&#34;, &#34;cod&#34;: 200 }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>JSON format API response fields
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>coord coord.lon Longitude of the location coord.lat Latitude of the location weather (more info Weather condition codes) weather.id Weather condition id weather.main Group of weather parameters (Rain, Snow, Clouds etc.) weather.description Weather condition within the group. Please find more here. You can get the output in your language. Learn more weather.icon Weather icon id base Internal parameter main main.temp Temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit main.feels_like Temperature. This temperature parameter accounts for the human perception of weather. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit main.pressure Atmospheric pressure on the sea level, hPa main.humidity Humidity, % main.temp_min Minimum temperature at the moment. This is minimal currently observed temperature (within large megalopolises and urban areas). Please find more info here. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit main.temp_max Maximum temperature at the moment. This is maximal currently observed temperature (within large megalopolises and urban areas). Please find more info here. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit main.sea_level Atmospheric pressure on the sea level, hPa main.grnd_level Atmospheric pressure on the ground level, hPa visibility Visibility, meter. The maximum value of the visibility is 10 km wind wind.speed Wind speed. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour wind.deg Wind direction, degrees (meteorological) wind.gust Wind gust. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour clouds clouds.all Cloudiness, % rain rain.1h (where available) Rain volume for the last 1 hour, mm. Please note that only mm as units of measurement are available for this parameter rain.3h (where available) Rain volume for the last 3 hours, mm. Please note that only mm as units of measurement are available for this parameter snow snow.1h(where available) Snow volume for the last 1 hour, mm. Please note that only mm as units of measurement are available for this parameter snow.3h (where available)Snow volume for the last 3 hours, mm. Please note that only mm as units of measurement are available for this parameter dt Time of data calculation, unix, UTC sys sys.type Internal parameter sys.id Internal parameter sys.message Internal parameter sys.country Country code (GB, JP etc.) sys.sunrise Sunrise time, unix, UTC sys.sunset Sunset time, unix, UTC timezone Shift in seconds from UTC id City ID. Please note that built-in geocoder functionality has been deprecated. Learn more here name City name. Please note that built-in geocoder functionality has been deprecated. Learn more here cod Internal parameter
+</span></span></code></pre></div><p>The first part are my instructions to Copilot. The second part is the documentation that I copied from the OpenWeather API documentation. This resulted in the following code:</p>
+<p>First, Copilot defined the response types:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Coord</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">lon</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">lat</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Weather</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">id</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">main</span>: <span style="color:#66d9ef">string</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">description</span>: <span style="color:#66d9ef">string</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">icon</span>: <span style="color:#66d9ef">string</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Main</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">temp</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">feels_like</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">temp_min</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">temp_max</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">pressure</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">humidity</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">sea_level</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">grnd_level</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Wind</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">speed</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">deg</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">gust</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Rain</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#39;1h&#39;</span><span style="color:#f92672">?:</span> <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#39;3h&#39;</span><span style="color:#f92672">?:</span> <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Clouds</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">all</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Sys</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">type</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">id</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">country</span>: <span style="color:#66d9ef">string</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">sunrise</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">sunset</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">WeatherResponse</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">coord</span>: <span style="color:#66d9ef">Coord</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">weather</span>: <span style="color:#66d9ef">Weather</span>[];
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">base</span>: <span style="color:#66d9ef">string</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">main</span>: <span style="color:#66d9ef">Main</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">visibility</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">wind</span>: <span style="color:#66d9ef">Wind</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">rain?</span>: <span style="color:#66d9ef">Rain</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">clouds</span>: <span style="color:#66d9ef">Clouds</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">dt</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">sys</span>: <span style="color:#66d9ef">Sys</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">timezone</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">id</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">name</span>: <span style="color:#66d9ef">string</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">cod</span>: <span style="color:#66d9ef">number</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Next, it defined the service class:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">axios</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;axios&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WeatherService</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">API_KEY</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;your_api_key_here&#39;</span>; <span style="color:#75715e">// replace with your actual API key
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">BASE_URL</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://api.openweathermap.org/data/2.5/weather&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">async</span> <span style="color:#a6e22e">getWeather</span>(<span style="color:#a6e22e">lat</span>: <span style="color:#66d9ef">number</span>, <span style="color:#a6e22e">lon</span>: <span style="color:#66d9ef">number</span>)<span style="color:#f92672">:</span> <span style="color:#a6e22e">Promise</span>&lt;<span style="color:#f92672">WeatherResponse</span>&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">axios</span>.<span style="color:#66d9ef">get</span>(<span style="color:#e6db74">`</span><span style="color:#e6db74">${</span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">BASE_URL</span><span style="color:#e6db74">}</span><span style="color:#e6db74">?lat=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">lat</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&amp;lon=</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">lon</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&amp;appid=</span><span style="color:#e6db74">${</span><span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">API_KEY</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">data</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><br>
+It even mentioned a potential security hazard; the suggestion contains a hardcoded api key but instead I would probably want to reference a secret store somewhere, or get the api key from an environment variable.</p>
+<p><img loading="lazy" src="/images/consume-api-copilot/vulnerability-message.png" alt="Vulnerability message"  />
+</p>
+<h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
+<p>GitHub Copilot cannot only help you with code completions or with generating code based on specific instructions. It can also understand a raw copy paste of documentation, and generate code based on that. Saving you precious time and mental load.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="https://sswart.github.io/">Jesse Swart Coding Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

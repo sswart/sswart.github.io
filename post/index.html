@@ -6,11 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Posts | Jesse Swart Coding Blog</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="">
 <meta name="description" content="Posts - Jesse Swart Coding Blog">
 <meta name="author" content="">
-<link rel="canonical" href="https://sswart.github.io/post/" />
-<link crossorigin="anonymous" href="/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
+<link rel="canonical" href="https://sswart.github.io/post/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b609c58d5c11bb90b1a54e04005d74ad1ddf22165eb79f5533967e57df9c3b50.css" integrity="sha256-tgnFjVwRu5CxpU4EAF10rR3fIhZet59VM5Z&#43;V9&#43;cO1A=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://sswart.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://sswart.github.io/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://sswart.github.io/favicon-32x32.png">
@@ -18,9 +18,8 @@
 <link rel="mask-icon" href="https://sswart.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.124.1">
 <link rel="alternate" type="application/rss+xml" href="https://sswart.github.io/post/index.xml">
-<link rel="alternate" hreflang="en" href="https://sswart.github.io/post/" />
+<link rel="alternate" hreflang="en" href="https://sswart.github.io/post/">
 <noscript>
     <style>
         #theme-toggle,
@@ -38,7 +37,7 @@
                 --secondary: rgb(155, 156, 157);
                 --tertiary: rgb(65, 66, 68);
                 --content: rgb(196, 196, 197);
-                --hljs-bg: rgb(46, 46, 51);
+                --code-block-bg: rgb(46, 46, 51);
                 --code-bg: rgb(55, 56, 62);
                 --border: rgb(51, 51, 51);
             }
@@ -99,14 +98,14 @@
     <nav class="nav">
         <div class="logo">
             <a href="https://sswart.github.io/" accesskey="h" title="Jesse Swart Coding Blog (Alt + H)">Jesse Swart Coding Blog</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -120,9 +119,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-                <ul class="lang-switch"><li>|</li>
-                </ul>
-            </span>
+            </div>
         </div>
         <ul id="menu">
         </ul>
@@ -130,135 +127,169 @@
 </header>
 <main class="main"> 
 <header class="page-header">
-  <h1>Posts</h1>
+  <h1>
+    Posts
+  </h1>
 </header>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Copilot Data Conversion
+    <h2 class="entry-hint-parent">Quickly Consume External APIs with GitHub Copilot
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
     </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
+    <p>Ever had to implement an external API that does have documentation, but does not offer an SDK or OpenAPI spec? GitHub Copilot is a really great tool to help with these kinds of conversions. In this post, I’ll show you how to quickly consume an external API using GitHub Copilot.
+The problem I would like to use the OpenWeather API to get the current weather for a specific location. The API documentation is available at https://openweathermap....</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-06-21 09:51:32 +0200 CEST'>June 21, 2024</span></footer>
+  <a class="entry-link" aria-label="post link to Quickly Consume External APIs with GitHub Copilot" href="https://sswart.github.io/post/consume-api-copilot/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Copilot Data Conversion
+    </h2>
+  </header>
+  <div class="entry-content">
     <p>Converting data to different formats with copilot Recently, I got a question from a client if GitHub Copilot would be able to convert data from a table designer tool into working test files. The answer is probably yes! The only requirement is that the table designer tool is able to export its table (or tables) into a textual format, like SQL, JSON or CSV.
 Here’s how you could achieve this with Copilot:...</p>
-  </section>
-  <footer class="entry-footer">&lt;span title=&#39;2024-06-19 13:47:56 &#43;0200 CEST&#39;&gt;June 19, 2024&lt;/span&gt;</footer>
+  </div>
+  <footer class="entry-footer"><span title='2024-06-19 13:47:56 +0200 CEST'>June 19, 2024</span></footer>
   <a class="entry-link" aria-label="post link to Copilot Data Conversion" href="https://sswart.github.io/post/copilot-data-conversion/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Access the Log Analytics API with Managed Identity
+    <h2 class="entry-hint-parent">Access the Log Analytics API with Managed Identity
     </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>Extending your alerts with additional data from the Log Analytics API I recently came accross a scenario where I needed to extend the data that was available in an alert. The alert data that was sent in the actiongroup only contained an EventId field. I was not at liberty to modify the alert, but I did notice an interesting extra property in the payload. The payload looked something like this:...</p>
-  </section>
-  <footer class="entry-footer">&lt;span title=&#39;2024-01-23 18:37:02 &#43;0100 CET&#39;&gt;January 23, 2024&lt;/span&gt;</footer>
+  </div>
+  <footer class="entry-footer"><span title='2024-01-23 18:37:02 +0100 CET'>January 23, 2024</span></footer>
   <a class="entry-link" aria-label="post link to Access the Log Analytics API with Managed Identity" href="https://sswart.github.io/post/mi-loganalyticsapi/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Authenticate Renovate with Service Principal in Azure DevOps
+    <h2 class="entry-hint-parent">Authenticate Renovate with Service Principal in Azure DevOps
     </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>If you are using Renovate or a similar tool to manage some aspects of your Azure DevOps repositories, you might have come accross a security issue. Renovate wants to to use a PAT that you created, or the $(System.AccessToken) variable.
 You probably want to stay away from creating a PAT yourself for the following reasons:
 User Dependency: PATs are tied to the user account that creates them. If that user leaves the organization or if their permissions change, the PAT and any processes using it will be affected....</p>
-  </section>
-  <footer class="entry-footer">&lt;span title=&#39;2023-05-15 11:28:51 &#43;0200 CEST&#39;&gt;May 15, 2023&lt;/span&gt;</footer>
+  </div>
+  <footer class="entry-footer"><span title='2023-05-15 11:28:51 +0200 CEST'>May 15, 2023</span></footer>
   <a class="entry-link" aria-label="post link to Authenticate Renovate with Service Principal in Azure DevOps" href="https://sswart.github.io/post/azdo-renovate-spn-authentication/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Azure DevOps Path Variable Pitfall
+    <h2 class="entry-hint-parent">Azure DevOps Path Variable Pitfall
     </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>Ever spent too much time debugging an issue that seemed impossible at first, but then turned out to be stupid? I have.
 Pipeline I was working on a pipeline. Just your run of the mill deployment pipeline really. I was trying to deploy some resources from a bicep template. It looked something like the following:
 variables: path: $(Build.SourcesDirectory)/agw-bicep agwName: &#39;my-agw&#39; agwRg: &#39;my-agw-rg&#39; kvName: &#39;my-agw-kv&#39; trigger: none pool: vmImage: ubuntu-latest jobs: - job: deploy pool: vmImage: ubuntu-latest timeoutInMinutes: 15 steps: - task: AzureCLI@2 displayName: &#39;Call Azure Cli&#39; inputs: azureSubscription: &#39;&lt;sub&gt;&#39; scriptType: &#39;pscore&#39; scriptLocation: &#39;inlineScript&#39; workingDirectory: $(oath) inlineScript: | (....</p>
-  </section>
-  <footer class="entry-footer">&lt;span title=&#39;2023-03-08 15:13:24 &#43;0100 CET&#39;&gt;March 8, 2023&lt;/span&gt;</footer>
+  </div>
+  <footer class="entry-footer"><span title='2023-03-08 15:13:24 +0100 CET'>March 8, 2023</span></footer>
   <a class="entry-link" aria-label="post link to Azure DevOps Path Variable Pitfall" href="https://sswart.github.io/post/azdo-variable-pitfall/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Secret Scanning in Azure DevOps
+    <h2 class="entry-hint-parent">Secret Scanning in Azure DevOps
     </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>Secret Scanning in Azure DevOps with GitLeaks As you might know, it is important to keep any private keys, passwords and/or other secrets away from your source control. Having secrets in source control poses many risks, the most important one being: you have no idea how or where those secrets will be stored once someone pulls your repository. If your repository is private, then you might argue that it is reasonably safe, but even then secrets will be stored in plain text on the pc of every person that works with the repository....</p>
-  </section>
-  <footer class="entry-footer">&lt;span title=&#39;2022-08-23 13:53:42 &#43;0200 CEST&#39;&gt;August 23, 2022&lt;/span&gt;</footer>
+  </div>
+  <footer class="entry-footer"><span title='2022-08-23 13:53:42 +0200 CEST'>August 23, 2022</span></footer>
   <a class="entry-link" aria-label="post link to Secret Scanning in Azure DevOps" href="https://sswart.github.io/post/secret-scanning-azdo/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>dotnet MAUI public key pinning
+    <h2 class="entry-hint-parent">dotnet MAUI public key pinning
     </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>dotnet MAUI public key pinning When it comes to client-side security, mobile apps can be a double-edged sword. On the one hand, the software is on a user-controlled device, so security is out of your hands. On the other hand, that device will probably connect to any old public wifi that it can get its hands on. Man-in-the-middle attacks are a definite risk.
 Luckily, we can improve protection against these by using certificate pinning, or public key pinning....</p>
-  </section>
-  <footer class="entry-footer">&lt;span title=&#39;2022-07-31 14:03:34 &#43;0200 CEST&#39;&gt;July 31, 2022&lt;/span&gt;</footer>
+  </div>
+  <footer class="entry-footer"><span title='2022-07-31 14:03:34 +0200 CEST'>July 31, 2022</span></footer>
   <a class="entry-link" aria-label="post link to dotnet MAUI public key pinning" href="https://sswart.github.io/post/maui-key-pinning/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Five easy steps to get started with secure DevOps
+    <h2 class="entry-hint-parent">Five easy steps to get started with secure DevOps
     </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>The DevOps movement has claimed it’s rightful place in our hearts. If it hasn’t, go read up on it. Working in a proper DevOps environment is amazing, and I cannot recommend enough for any organization to try it.
 But, let’s be real. DevOps has been around for a while. It is not the shiny new thing it used to be anymore.
 We need something new.
 Maybe something security related, security is always an important aspect of creating software....</p>
-  </section>
-  <footer class="entry-footer">&lt;span title=&#39;2022-07-17 15:50:15 &#43;0200 CEST&#39;&gt;July 17, 2022&lt;/span&gt;</footer>
+  </div>
+  <footer class="entry-footer"><span title='2022-07-17 15:50:15 +0200 CEST'>July 17, 2022</span></footer>
   <a class="entry-link" aria-label="post link to Five easy steps to get started with secure DevOps" href="https://sswart.github.io/post/five-easy-devsecops-steps/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Xamarin Development Setup Part 2<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>
+    <h2 class="entry-hint-parent">Xamarin Development Setup Part 2
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
     </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>Xamarin Development Setup Part 2. Continuous Integration/Delivery With our initial solution in place, we will now start defining our build/deployment pipelines. So let us quickly sum up what we want our pipelines to do.
 First of all, we want to build the project and run our unit tests each and every time we make a commit, and before we are allowed to merge a pull request. We can do this quickly and often, as the build time is usually a measure of minutes, and so are the unit tests....</p>
-  </section>
-  <footer class="entry-footer">&lt;span title=&#39;2021-12-17 13:41:44 &#43;0100 CET&#39;&gt;December 17, 2021&lt;/span&gt;</footer>
+  </div>
+  <footer class="entry-footer"><span title='2021-12-17 13:41:44 +0100 CET'>December 17, 2021</span></footer>
   <a class="entry-link" aria-label="post link to Xamarin Development Setup Part 2" href="https://sswart.github.io/post/xamarin-development-setup-part-2/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Xamarin Development Setup Part 1<sup><span class="entry-isdraft">&nbsp;&nbsp;[draft]</span></sup>
+    <h2 class="entry-hint-parent">Xamarin Development Setup Part 1
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
     </h2>
   </header>
-  <section class="entry-content">
+  <div class="entry-content">
     <p>Setting up Xamarin Forms Development for you and your team In this series we will be learning the steps to achieve a development setup with Xamarin that will enable you to develop quickly and securely, and also allow you to have some fun while doing it. Let’s dive right in.
 Part 1. Initial project There are several ways to get started with Xamarin Forms. The easiest is probably to install Visual Studio (Visual Studio Community edition is free)....</p>
-  </section>
-  <footer class="entry-footer">&lt;span title=&#39;2021-12-15 21:21:29 &#43;0100 CET&#39;&gt;December 15, 2021&lt;/span&gt;</footer>
+  </div>
+  <footer class="entry-footer"><span title='2021-12-15 21:21:29 +0100 CET'>December 15, 2021</span></footer>
   <a class="entry-link" aria-label="post link to Xamarin Development Setup Part 1" href="https://sswart.github.io/post/xamarin-development-setup-part-1/"></a>
 </article>
     </main>
     
 <footer class="footer">
-    <span>&copy; 2024 <a href="https://sswart.github.io/">Jesse Swart Coding Blog</a></span>
+        <span>&copy; 2024 <a href="https://sswart.github.io/">Jesse Swart Coding Blog</a></span> · 
+
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
     </span>
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

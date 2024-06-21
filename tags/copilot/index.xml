@@ -4,18 +4,17 @@
     <title>Copilot on Jesse Swart Coding Blog</title>
     <link>https://sswart.github.io/tags/copilot/</link>
     <description>Recent content in Copilot on Jesse Swart Coding Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.124.1</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Jun 2024 13:47:56 +0200</lastBuildDate><atom:link href="https://sswart.github.io/tags/copilot/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Jun 2024 13:47:56 +0200</lastBuildDate>
+    <atom:link href="https://sswart.github.io/tags/copilot/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Copilot Data Conversion</title>
       <link>https://sswart.github.io/post/copilot-data-conversion/</link>
       <pubDate>Wed, 19 Jun 2024 13:47:56 +0200</pubDate>
-      
       <guid>https://sswart.github.io/post/copilot-data-conversion/</guid>
       <description>Converting data to different formats with copilot Recently, I got a question from a client if GitHub Copilot would be able to convert data from a table designer tool into working test files. The answer is probably yes! The only requirement is that the table designer tool is able to export its table (or tables) into a textual format, like SQL, JSON or CSV.
 Here&amp;rsquo;s how you could achieve this with Copilot:</description>
     </item>
-    
   </channel>
 </rss>

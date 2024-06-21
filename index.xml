@@ -4,100 +4,91 @@
     <title>Jesse Swart Coding Blog</title>
     <link>https://sswart.github.io/</link>
     <description>Recent content on Jesse Swart Coding Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.124.1</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Jun 2024 13:47:56 +0200</lastBuildDate><atom:link href="https://sswart.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 21 Jun 2024 09:51:32 +0200</lastBuildDate>
+    <atom:link href="https://sswart.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Quickly Consume External APIs with GitHub Copilot</title>
+      <link>https://sswart.github.io/post/consume-api-copilot/</link>
+      <pubDate>Fri, 21 Jun 2024 09:51:32 +0200</pubDate>
+      <guid>https://sswart.github.io/post/consume-api-copilot/</guid>
+      <description>Ever had to implement an external API that does have documentation, but does not offer an SDK or OpenAPI spec? GitHub Copilot is a really great tool to help with these kinds of conversions. In this post, I&amp;rsquo;ll show you how to quickly consume an external API using GitHub Copilot.
+The problem I would like to use the OpenWeather API to get the current weather for a specific location. The API documentation is available at https://openweathermap.</description>
+    </item>
     <item>
       <title>Copilot Data Conversion</title>
       <link>https://sswart.github.io/post/copilot-data-conversion/</link>
       <pubDate>Wed, 19 Jun 2024 13:47:56 +0200</pubDate>
-      
       <guid>https://sswart.github.io/post/copilot-data-conversion/</guid>
       <description>Converting data to different formats with copilot Recently, I got a question from a client if GitHub Copilot would be able to convert data from a table designer tool into working test files. The answer is probably yes! The only requirement is that the table designer tool is able to export its table (or tables) into a textual format, like SQL, JSON or CSV.
 Here&amp;rsquo;s how you could achieve this with Copilot:</description>
     </item>
-    
     <item>
       <title>Access the Log Analytics API with Managed Identity</title>
       <link>https://sswart.github.io/post/mi-loganalyticsapi/</link>
       <pubDate>Tue, 23 Jan 2024 18:37:02 +0100</pubDate>
-      
       <guid>https://sswart.github.io/post/mi-loganalyticsapi/</guid>
       <description>Extending your alerts with additional data from the Log Analytics API I recently came accross a scenario where I needed to extend the data that was available in an alert. The alert data that was sent in the actiongroup only contained an EventId field. I was not at liberty to modify the alert, but I did notice an interesting extra property in the payload. The payload looked something like this:</description>
     </item>
-    
     <item>
       <title>Authenticate Renovate with Service Principal in Azure DevOps</title>
       <link>https://sswart.github.io/post/azdo-renovate-spn-authentication/</link>
       <pubDate>Mon, 15 May 2023 11:28:51 +0200</pubDate>
-      
       <guid>https://sswart.github.io/post/azdo-renovate-spn-authentication/</guid>
       <description>If you are using Renovate or a similar tool to manage some aspects of your Azure DevOps repositories, you might have come accross a security issue. Renovate wants to to use a PAT that you created, or the $(System.AccessToken) variable.
 You probably want to stay away from creating a PAT yourself for the following reasons:
 User Dependency: PATs are tied to the user account that creates them. If that user leaves the organization or if their permissions change, the PAT and any processes using it will be affected.</description>
     </item>
-    
     <item>
       <title>Azure DevOps Path Variable Pitfall</title>
       <link>https://sswart.github.io/post/azdo-variable-pitfall/</link>
       <pubDate>Wed, 08 Mar 2023 15:13:24 +0100</pubDate>
-      
       <guid>https://sswart.github.io/post/azdo-variable-pitfall/</guid>
       <description>Ever spent too much time debugging an issue that seemed impossible at first, but then turned out to be stupid? I have.
 Pipeline I was working on a pipeline. Just your run of the mill deployment pipeline really. I was trying to deploy some resources from a bicep template. It looked something like the following:
 variables: path: $(Build.SourcesDirectory)/agw-bicep agwName: &amp;#39;my-agw&amp;#39; agwRg: &amp;#39;my-agw-rg&amp;#39; kvName: &amp;#39;my-agw-kv&amp;#39; trigger: none pool: vmImage: ubuntu-latest jobs: - job: deploy pool: vmImage: ubuntu-latest timeoutInMinutes: 15 steps: - task: AzureCLI@2 displayName: &amp;#39;Call Azure Cli&amp;#39; inputs: azureSubscription: &amp;#39;&amp;lt;sub&amp;gt;&amp;#39; scriptType: &amp;#39;pscore&amp;#39; scriptLocation: &amp;#39;inlineScript&amp;#39; workingDirectory: $(oath) inlineScript: | (.</description>
     </item>
-    
     <item>
       <title>Secret Scanning in Azure DevOps</title>
       <link>https://sswart.github.io/post/secret-scanning-azdo/</link>
       <pubDate>Tue, 23 Aug 2022 13:53:42 +0200</pubDate>
-      
       <guid>https://sswart.github.io/post/secret-scanning-azdo/</guid>
       <description>Scan your pull requests for secrets with the free gitleaks tool</description>
     </item>
-    
     <item>
       <title>dotnet MAUI public key pinning</title>
       <link>https://sswart.github.io/post/maui-key-pinning/</link>
       <pubDate>Sun, 31 Jul 2022 14:03:34 +0200</pubDate>
-      
       <guid>https://sswart.github.io/post/maui-key-pinning/</guid>
       <description>dotnet MAUI public key pinning When it comes to client-side security, mobile apps can be a double-edged sword. On the one hand, the software is on a user-controlled device, so security is out of your hands. On the other hand, that device will probably connect to any old public wifi that it can get its hands on. Man-in-the-middle attacks are a definite risk.
 Luckily, we can improve protection against these by using certificate pinning, or public key pinning.</description>
     </item>
-    
     <item>
       <title>Five easy steps to get started with secure DevOps</title>
       <link>https://sswart.github.io/post/five-easy-devsecops-steps/</link>
       <pubDate>Sun, 17 Jul 2022 15:50:15 +0200</pubDate>
-      
       <guid>https://sswart.github.io/post/five-easy-devsecops-steps/</guid>
       <description>The DevOps movement has claimed it&amp;rsquo;s rightful place in our hearts. If it hasn&amp;rsquo;t, go read up on it. Working in a proper DevOps environment is amazing, and I cannot recommend enough for any organization to try it.
 But, let&amp;rsquo;s be real. DevOps has been around for a while. It is not the shiny new thing it used to be anymore.
 We need something new.
 Maybe something security related, security is always an important aspect of creating software.</description>
     </item>
-    
     <item>
       <title>Xamarin Development Setup Part 2</title>
       <link>https://sswart.github.io/post/xamarin-development-setup-part-2/</link>
       <pubDate>Fri, 17 Dec 2021 13:41:44 +0100</pubDate>
-      
       <guid>https://sswart.github.io/post/xamarin-development-setup-part-2/</guid>
       <description>Xamarin Development Setup Part 2. Continuous Integration/Delivery With our initial solution in place, we will now start defining our build/deployment pipelines. So let us quickly sum up what we want our pipelines to do.
 First of all, we want to build the project and run our unit tests each and every time we make a commit, and before we are allowed to merge a pull request. We can do this quickly and often, as the build time is usually a measure of minutes, and so are the unit tests.</description>
     </item>
-    
     <item>
       <title>Xamarin Development Setup Part 1</title>
       <link>https://sswart.github.io/post/xamarin-development-setup-part-1/</link>
       <pubDate>Wed, 15 Dec 2021 21:21:29 +0100</pubDate>
-      
       <guid>https://sswart.github.io/post/xamarin-development-setup-part-1/</guid>
       <description>Setting up Xamarin Forms Development for you and your team In this series we will be learning the steps to achieve a development setup with Xamarin that will enable you to develop quickly and securely, and also allow you to have some fun while doing it. Let&amp;rsquo;s dive right in.
 Part 1. Initial project There are several ways to get started with Xamarin Forms. The easiest is probably to install Visual Studio (Visual Studio Community edition is free).</description>
     </item>
-    
   </channel>
 </rss>
