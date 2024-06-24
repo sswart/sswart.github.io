@@ -6,15 +6,8 @@
     <description>Recent content in Tags on Jesse Swart Coding Blog</description>
     <generator>Hugo -- 0.124.1</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Jun 2024 13:47:56 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 24 Jun 2024 16:06:14 +0200</lastBuildDate>
     <atom:link href="https://sswart.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Conversion</title>
-      <link>https://sswart.github.io/tags/conversion/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://sswart.github.io/tags/conversion/</guid>
-      <description></description>
-    </item>
     <item>
       <title>Copilot</title>
       <link>https://sswart.github.io/tags/copilot/</link>
@@ -23,17 +16,45 @@
       <description></description>
     </item>
     <item>
+      <title>Development</title>
+      <link>https://sswart.github.io/tags/development/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://sswart.github.io/tags/development/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>GitHub</title>
+      <link>https://sswart.github.io/tags/github/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://sswart.github.io/tags/github/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Python</title>
+      <link>https://sswart.github.io/tags/python/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://sswart.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>TDD</title>
+      <link>https://sswart.github.io/tags/tdd/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://sswart.github.io/tags/tdd/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Conversion</title>
+      <link>https://sswart.github.io/tags/conversion/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://sswart.github.io/tags/conversion/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Data</title>
       <link>https://sswart.github.io/tags/data/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://sswart.github.io/tags/data/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Github</title>
-      <link>https://sswart.github.io/tags/github/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://sswart.github.io/tags/github/</guid>
       <description></description>
     </item>
     <item>
